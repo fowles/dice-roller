@@ -3,18 +3,46 @@
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent"
 	android:orientation="vertical"
-	android:padding="10px" 
+	android:padding="0px" 
 >
-	<TextView android:id="@+id/successLabel"
-		android:layout_width="fill_parent" 
-		android:layout_height="wrap_content" 
-		android:text="Successes: " 
-	/>
-	<TextView android:id="@+id/rollLabel"
-		android:layout_width="fill_parent" 
-		android:layout_height="wrap_content" 
-		android:text="Rolls: " 
-	/>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:padding="10px" 
+    >  
+    	<TextView android:id="@+id/successLabel"
+    		android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content" 
+    		android:layout_alignParentLeft="true"
+    		android:text="Successes: " 
+    	/>
+    	<TextView android:id="@+id/rollLabel"
+    		android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content"
+    		android:layout_below="@id/successLabel" 
+    		android:text="Rolls: " 
+    	/>
+        <ImageButton android:id="@+id/add_dice"
+            android:src="@drawable/d10_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+    		android:layout_alignParentRight="true"
+        />
+        <TextView 
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content" 
+        	android:layout_alignParentLeft="true"
+    		android:layout_below="@id/add_dice" 
+    		android:text="Roll Details" 
+    	/>
+        <TextView android:id="@+id/item_dice"
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content" 
+        	android:layout_alignParentRight="true"
+    		android:layout_below="@id/add_dice" 
+    		android:text="Stunt Dice" 
+    	/>
+    </RelativeLayout>
 	<ListView xmlns:android="http://schemas.android.com/apk/res/android"
 		android:id="@+id/list"
 		android:layout_width="fill_parent"

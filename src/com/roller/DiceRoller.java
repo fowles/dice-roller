@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class DiceRoller extends Activity {
+public class DiceRoller extends Activity implements View.OnClickListener {
+    private ListAdapter rollAdapter = null;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -20,16 +22,15 @@ public class DiceRoller extends Activity {
 
         final View main = inflater.inflate(R.layout.main, null);
 
+        final View addDiceButton = main.findViewById(R.id.add_dice);
+        addDiceButton.setOnClickListener(this);
+
         final Context ctxt = getApplicationContext();
         final ListView listView = (ListView) main.findViewById(R.id.list);
-        final ListAdapter la = new ListAdapter(ctxt);
-
-        final View header = inflater.inflate(R.layout.header, null);
-        listView.addHeaderView(header);
-
-        listView.setAdapter(la);
-        la.add(new RollInfo("Attack", 10));
-        la.add(new RollInfo("Damage", 20));
+        rollAdapter = new ListAdapter(ctxt);
+        listView.setAdapter(rollAdapter);
+        rollAdapter.add(new RollInfo("Attack", 10));
+        rollAdapter.add(new RollInfo("Damage", 20));
 
         setContentView(main);
     }
@@ -72,5 +73,9 @@ public class DiceRoller extends Activity {
             return res;
         }
 
+    }
+
+    public void onClick(final View v) {
+        rollAdapter.add(new RollInfo("Damage", 20));
     }
 }
