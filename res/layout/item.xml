@@ -1,52 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" 
 	android:layout_height="wrap_content"
-	android:orientation="horizontal"
 	android:padding="10px" 
 >    
-	<TextView android:id="@+id/entry_dummy"
-	    android:visibility="invisible"
+    <TextView android:id="@+id/item_name"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
-		android:text="" 
-	/>
-	<TextView 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:text="Dice:"
-		android:padding="2px"  
-	/>
-	<TextView android:id="@+id/dice_label"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:text="N"
-		android:padding="2px" 
-	/>
-    <TextView 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:text="Stunt:" 
+    	android:layout_alignParentLeft="true"
+		android:text="Default Name" 
 		android:padding="2px"
 	/>
-	<Button android:id="@+id/stunt0"
+    <TextView android:id="@+id/item_dice"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
-		android:text="0" 
+    	android:layout_below="@id/item_name"
+    	android:layout_marginLeft='20px'    	
+		android:text="dice" 
+		android:padding="2px"
 	/>
-	<Button android:id="@+id/stunt1"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:text="1" 
-	/>
-	<Button android:id="@+id/stunt2"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:text="2" 
-	/>
-	<Button android:id="@+id/stunt3"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:text="3" 
-	/>
-</LinearLayout>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	android:layout_alignParentRight="true"
+    	android:padding="0px" 
+    >    
+    	<Button android:id="@+id/stunt0"
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content" 
+    		android:text="0" 
+    	/>
+    	<Button android:id="@+id/stunt1"
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content" 
+    		android:text="1" 
+    	/>
+    	<Button android:id="@+id/stunt2"
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content" 
+    		android:text="2" 
+    	/>
+    	<Button android:id="@+id/stunt3"
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content" 
+    		android:text="3" 
+    	/>
+	</LinearLayout>
+</RelativeLayout>

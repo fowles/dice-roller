@@ -16,12 +16,12 @@ public class DiceRoller extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Context ctxt = getApplicationContext();
-
         ListView listView = (ListView) findViewById(R.id.list);
         ListAdapter la = new ListAdapter(ctxt);
         listView.setAdapter(la);
-
-//        listView.addView(item);
+        la.add(new RollInfo("Attack", 10));
+        la.add(new RollInfo("Damage", 20));
+        listView.invalidate();
     }
     
     private static class RollInfo {
@@ -33,22 +33,24 @@ public class DiceRoller extends Activity {
         }
         public String getName() { return name; }
         public int getNumDice() { return numDice; }
+        
+        public void updateView(View v) {
+            TextView nameView = (TextView) v.findViewById(R.id.item_name);
+            TextView diceView = (TextView) v.findViewById(R.id.item_dice);
+            nameView.setText(name);
+            diceView.setText(numDice + "D10");
+        }
     }
     
-    private class ListAdapter extends ArrayAdapter<String> {
+    private class ListAdapter extends ArrayAdapter<RollInfo> {
         public ListAdapter(Context context) {
-            super(context, R.layout.item, R.id.entry_dummy);            
+            super(context, R.layout.item, R.id.item_name);            
         }
         
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View res = super.getView(position, convertView, parent);
-//            TextView ninja = (TextView) res.findViewById(R.id.ninja);
-//            TextView pirate = (TextView) res.findViewById(R.id.pirate);
-//
-//            String item = this.getItem(position);
-//            ninja.setText(item + position);
-//            pirate.setText(position + item);
+            getItem(position).updateView(res);
             return res;
         }
         
