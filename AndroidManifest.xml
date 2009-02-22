@@ -3,7 +3,7 @@
       package="com.roller"
       android:versionCode="1"
       android:versionName="1.0.0">
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:label="@string/app_name" android:icon="@drawable/d10">
         <activity android:name=".DiceRoller"
                   android:label="@string/app_name">
             <intent-filter>
