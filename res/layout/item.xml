@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"
+	android:orientation="horizontal"
+	android:padding="10px" 
+>    
+	<TextView android:id="@+id/entry_dummy"
+	    android:visibility="invisible"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:text="" 
+	/>
+	<TextView 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:text="Dice:"
+		android:padding="2px"  
+	/>
+	<TextView android:id="@+id/dice_label"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:text="N"
+		android:padding="2px" 
+	/>
+    <TextView 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:text="Stunt:" 
+		android:padding="2px"
+	/>
+	<Button android:id="@+id/stunt0"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:text="0" 
+	/>
+	<Button android:id="@+id/stunt1"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:text="1" 
+	/>
+	<Button android:id="@+id/stunt2"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:text="2" 
+	/>
+	<Button android:id="@+id/stunt3"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:text="3" 
+	/>
+</LinearLayout>
