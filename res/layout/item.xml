@@ -4,6 +4,14 @@
 	android:layout_height="wrap_content"
 	android:padding="10px" 
 >    
+    <TextView android:id="@+id/item_dummy"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+    	android:layout_alignParentLeft="true"
+		android:text="Default Name" 
+		android:padding="2px"
+		android:visibility="gone"
+	/>
     <TextView android:id="@+id/item_name"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 

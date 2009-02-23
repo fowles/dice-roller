@@ -62,7 +62,7 @@ public class DiceRoller extends Activity implements View.OnClickListener {
 
     private class ListAdapter extends ArrayAdapter<RollInfo> {
         public ListAdapter(final Context context) {
-            super(context, R.layout.item, R.id.item_name);
+            super(context, R.layout.item, R.id.item_dummy);
         }
 
         @Override
