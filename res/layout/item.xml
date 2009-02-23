@@ -4,7 +4,7 @@
 	android:layout_height="wrap_content"
 	android:padding="10px" 
 >    
-    <TextView android:id="@+id/item_dummy"
+    <TextView android:id="@+item/dummy"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
     	android:layout_alignParentLeft="true"
@@ -12,17 +12,17 @@
 		android:padding="2px"
 		android:visibility="gone"
 	/>
-    <TextView android:id="@+id/item_name"
+    <TextView android:id="@+item/name"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
     	android:layout_alignParentLeft="true"
 		android:text="Default Name" 
 		android:padding="2px"
 	/>
-    <TextView android:id="@+id/item_dice"
+    <TextView android:id="@+item/dice"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
-    	android:layout_below="@id/item_name"
+    	android:layout_below="@item/name"
     	android:layout_marginLeft='20px'    	
 		android:text="dice" 
 		android:padding="2px"
@@ -34,22 +34,22 @@
     	android:layout_alignParentRight="true"
     	android:padding="0px" 
     >    
-    	<Button android:id="@+id/stunt0"
+    	<Button android:id="@+item/stunt0"
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" 
     		android:text="0" 
     	/>
-    	<Button android:id="@+id/stunt1"
+    	<Button android:id="@+item/stunt1"
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" 
     		android:text="1" 
     	/>
-    	<Button android:id="@+id/stunt2"
+    	<Button android:id="@+item/stunt2"
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" 
     		android:text="2" 
     	/>
-    	<Button android:id="@+id/stunt3"
+    	<Button android:id="@+item/stunt3"
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" 
     		android:text="3" 
