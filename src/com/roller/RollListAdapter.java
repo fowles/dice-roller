@@ -36,7 +36,7 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
         return v;
     }
     
-    private static class RollItemListener implements OnClickListener {
+    static class RollItemListener implements OnClickListener {
         private final RollDetails details;
         private final MainWindow mainWindow;
         
