@@ -26,6 +26,18 @@ public class MainWindow extends Activity implements View.OnClickListener {
 
         rollAdapter = new RollListAdapter(this);
     }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        rollAdapter.loadList();
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        rollAdapter.saveList();
+    }
 
     public void onClick(final View v) {
         final Dialog d = new Dialog(this);
