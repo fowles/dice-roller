@@ -1,77 +1,30 @@
 package com.roller;
 
+import java.util.Random;
+
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainWindow extends Activity implements View.OnClickListener {
-    private ListAdapter rollAdapter = null;
-    private ListView listView = null;
+    private final Random random = new Random();
+    private RollListAdapter rollAdapter = null;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
 
-        final LayoutInflater inflater = getLayoutInflater();
-
-        final View main = inflater.inflate(R.layout.main, null);
-
-        final View addDiceButton = main.findViewById(R.main.add_dice);
+        final View addDiceButton = findViewById(R.main.add_dice);
         addDiceButton.setOnClickListener(this);
 
-        final Context ctxt = getApplicationContext();
-        listView = (ListView) main.findViewById(R.main.list);
-        rollAdapter = new ListAdapter(ctxt);
-        listView.setAdapter(rollAdapter);
-        setContentView(main);
-    }
-
-    private static class RollInfo {
-        private final CharSequence name;
-        private final int numDice;
-        private final boolean isDamage;
-
-        public RollInfo(final CharSequence n, final int d, final boolean damage) {
-            name = n;
-            numDice = d;
-            isDamage = damage;
-        }
-
-        public CharSequence getName() { return name; }
-        public int getNumDice() { return numDice; }
-        public boolean isDamage() { return isDamage; }
-
-        public void updateView(final View v) {
-            final TextView nameView = (TextView) v.findViewById(R.item.name);
-            final TextView diceView = (TextView) v.findViewById(R.item.dice);
-            nameView.setText(name);
-            diceView.setText(numDice + "D10");
-        }
-    }
-
-    private class ListAdapter extends ArrayAdapter<RollInfo> {
-        public ListAdapter(final Context context) {
-            super(context, R.layout.item, R.item.dummy);
-        }
-
-        @Override
-        public View getView(final int position, final View convertView, final ViewGroup parent) {
-            final View res = super.getView(position, convertView, parent);
-            getItem(position).updateView(res);
-            return res;
-        }
-
+        rollAdapter = new RollListAdapter(this);
     }
 
     public void onClick(final View v) {
@@ -86,7 +39,7 @@ public class MainWindow extends Activity implements View.OnClickListener {
                 final TextView dice = (TextView) d.findViewById(R.add_item.dice);
                 final CheckBox damage = (CheckBox) d.findViewById(R.add_item.damage);
 
-                rollAdapter.add(new RollInfo(
+                rollAdapter.add(new RollDetails(
                         name.getText(),
                         Integer.parseInt(dice.getText().toString()),
                         damage.isChecked()
@@ -103,5 +56,34 @@ public class MainWindow extends Activity implements View.OnClickListener {
         });
 
         d.show();
+    }
+
+    public void performRoll(final RollDetails details, final int stunt) {
+        final int dice = details.getNumDice() + stunt;
+        final boolean damage = details.isDamage();
+        
+        final StringBuilder rolls = new StringBuilder();
+        int successes = 0;
+        boolean botchable = true;
+        for (int i = 0; i < dice; ++i) {
+            final int r = random.nextInt(10) + 1;
+            
+            if (i > 0) { rolls.append(", "); }
+            rolls.append(r);
+            
+            if (r != 1) { botchable = false; } 
+            if (r >= 7) {
+                successes += !damage && r == 10 ? 2 : 1;
+            }
+        }
+        
+        final TextView successText = (TextView) findViewById(R.main.success_label);
+        final TextView rollText = (TextView) findViewById(R.main.roll_label);
+        if (botchable && successes == 0) {
+            successText.setText("Successes: BOTCH");
+        } else {
+            successText.setText("Successes: " + successes);
+        }
+        rollText.setText(rolls);
     }
 }

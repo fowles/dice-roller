@@ -10,17 +10,11 @@
     	android:layout_height="wrap_content"
     	android:padding="10px" 
     >  
-    	<TextView android:id="@+main/successLabel"
+    	<TextView android:id="@+main/success_label"
     		android:layout_width="fill_parent" 
     		android:layout_height="wrap_content" 
     		android:layout_alignParentLeft="true"
     		android:text="Successes: " 
-    	/>
-    	<TextView android:id="@+main/rollLabel"
-    		android:layout_width="fill_parent" 
-    		android:layout_height="wrap_content"
-    		android:layout_below="@main/successLabel" 
-    		android:text="Rolls: " 
     	/>
         <ImageButton android:id="@+main/add_dice"
             android:src="@drawable/d10_add"
@@ -28,6 +22,14 @@
             android:layout_height="wrap_content"
     		android:layout_alignParentRight="true"
         />
+        <TextView android:id="@+main/roll_label"
+    		android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content"
+    		android:layout_below="@main/success_label"
+    		android:layout_alignParentLeft="true" 
+    		android:layout_toLeftOf='@main/add_dice'
+    		android:text="" 
+    	/>
         <TextView 
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" 
