@@ -14,7 +14,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class DiceRoller extends Activity implements View.OnClickListener {
+public class MainWindow extends Activity implements View.OnClickListener {
     private ListAdapter rollAdapter = null;
     private ListView listView = null;
 
