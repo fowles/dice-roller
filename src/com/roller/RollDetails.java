@@ -1,17 +1,20 @@
 package com.roller;
 
-public class RollDetails {
-    private final CharSequence name;
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class RollDetails implements Serializable {
+    private final String name;
     private final int numDice;
     private final boolean isDamage;
 
     public RollDetails(final CharSequence n, final int d, final boolean damage) {
-        name = n;
+        name = n.toString();
         numDice = d;
         isDamage = damage;
     }
 
-    public CharSequence getName() { return name; }
+    public String getName() { return name; }
     public int getNumDice() { return numDice; }
     public boolean isDamage() { return isDamage; }
 }

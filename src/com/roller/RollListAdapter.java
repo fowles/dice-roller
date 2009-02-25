@@ -3,8 +3,14 @@
  */
 package com.roller;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+
+import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -13,10 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class RollListAdapter extends ArrayAdapter<RollDetails> {
-    private static final String ROLL_LIST_PREFS = "roll-list-prefs";
-    private static final String PREFS_NAME_PREFIX = "roll-name-";
-    private static final String PREFS_DICE_PREFIX = "roll-dice";
-    private static final String PREFS_DAMAGE_PREFIX = "roll-damage";
+    private static final String LOG_TAG = "com.roller.RollListAdapter";
+    private static final String SAVE_FILE = "roll-list-file";
     
     private final ListView listView;
     private final MainWindow mainWindow;
@@ -73,29 +77,41 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
     }
 
     public void loadList() {
-        final SharedPreferences settings = getContext().getSharedPreferences(ROLL_LIST_PREFS, 0);
         clear();
-        int i = 0;
-        String k = PREFS_NAME_PREFIX + i;
-        while (settings.contains(k)) {
-            final String name = settings.getString(k, "");
-            final int dice = settings.getInt(PREFS_DICE_PREFIX+i, 0);
-            final boolean damage = settings.getBoolean(PREFS_DAMAGE_PREFIX+i, false);
-            add(new RollDetails(name, dice, damage));
-            k = PREFS_NAME_PREFIX + ++i;
+        try {
+            final ObjectInputStream ois = new ObjectInputStream(getContext().openFileInput(SAVE_FILE));
+            final RollDetails[] rolls = (RollDetails[]) ois.readObject();
+            ois.close();
+            
+            for (final RollDetails r : rolls) {
+                this.add(r);
+            }
+        } catch (final FileNotFoundException e) {
+            // oh well
+        } catch (final StreamCorruptedException e) {
+            Log.w(LOG_TAG, e);
+        } catch (final IOException e) {
+            Log.w(LOG_TAG, e);
+        } catch (final ClassNotFoundException e) {
+            Log.w(LOG_TAG, e);
         }
     }
 
     public void saveList() {
-        final SharedPreferences settings = getContext().getSharedPreferences(ROLL_LIST_PREFS, 0);
-        final Editor edit = settings.edit();
         final int len = getCount();
+        final RollDetails[] rolls = new RollDetails[len];
         for (int i = 0; i < len; ++i) {
-            final RollDetails r = getItem(i);
-            edit.putString(PREFS_NAME_PREFIX+i, r.getName().toString());
-            edit.putInt(PREFS_DICE_PREFIX+i, r.getNumDice());
-            edit.putBoolean(PREFS_DAMAGE_PREFIX+i, r.isDamage());
+            rolls[i] = getItem(i);
         }
-        edit.commit();
+        
+        try {
+            final ObjectOutputStream oos = new ObjectOutputStream(getContext().openFileOutput(SAVE_FILE, Context.MODE_PRIVATE));
+            oos.writeObject(rolls);
+            oos.close();
+        } catch (final FileNotFoundException e) {
+            Log.w(LOG_TAG, e);
+        } catch (final IOException e) {
+            Log.w(LOG_TAG, e);
+        }
     }
 }
