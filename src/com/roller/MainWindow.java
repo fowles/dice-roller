@@ -3,12 +3,8 @@ package com.roller;
 import java.util.Random;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class MainWindow extends Activity implements View.OnClickListener {
@@ -40,34 +36,7 @@ public class MainWindow extends Activity implements View.OnClickListener {
     }
 
     public void onClick(final View v) {
-        final Dialog d = new Dialog(this);
-        d.setTitle("Add Roll Option");
-        d.setContentView(R.layout.add_item);
-
-        final Button ok = (Button) d.findViewById(R.add_item.ok);
-        ok.setOnClickListener(new OnClickListener() {
-            public void onClick(final View v) {
-                final TextView name = (TextView) d.findViewById(R.add_item.name);
-                final TextView dice = (TextView) d.findViewById(R.add_item.dice);
-                final CheckBox damage = (CheckBox) d.findViewById(R.add_item.damage);
-
-                rollAdapter.add(new RollDetails(
-                        name.getText(),
-                        Integer.parseInt(dice.getText().toString()),
-                        damage.isChecked()
-                ));
-                d.dismiss();
-            }
-        });
-
-        final Button cancel = (Button) d.findViewById(R.add_item.cancel);
-        cancel.setOnClickListener(new OnClickListener() {
-            public void onClick(final View v) {
-                d.dismiss();
-            }
-        });
-
-        d.show();
+        rollAdapter.showAddDialog();
     }
 
     public void performRoll(final RollDetails details, final int stunt) {
