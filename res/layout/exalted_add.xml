@@ -4,33 +4,33 @@
 	android:layout_height="wrap_content"
 	android:padding="10px" 
 >    
-    <TableLayout android:id="@+add_item/table"
+    <TableLayout android:id="@+exalted_add/table"
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content"
     	android:stretchColumns="1"
     	android:padding="10px" 
     >
         <TableRow>
-            <TextView android:id="@+add_item/name_label"
+            <TextView android:id="@+exalted_add/name_label"
                 android:text="Name:"
                 android:paddingRight="2px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"     
             />
-            <EditText android:id="@+add_item/name"
+            <EditText android:id="@+exalted_add/name"
                 android:text=""
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"       
             />  
         </TableRow> 
         <TableRow>     
-            <TextView android:id="@+add_item/dice_label"
+            <TextView android:id="@+exalted_add/dice_label"
                 android:text="Dice Count:"
                 android:paddingRight="2px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"     
             />
-            <EditText android:id="@+add_item/dice"
+            <EditText android:id="@+exalted_add/dice"
                 android:text="8"
                 android:numeric="integer"
                 android:layout_width="fill_parent"
@@ -39,14 +39,14 @@
         </TableRow> 
         <TableRow>     
             <View/>
-            <CheckBox android:id="@+add_item/damage"
+            <CheckBox android:id="@+exalted_add/damage"
                 android:text="damage roll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
             />
         </TableRow> 
     </TableLayout>
-	<Button android:id="@+add_item/cancel"
+	<Button android:id="@+exalted_add/cancel"
     	android:minWidth='70px'
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 	
@@ -54,11 +54,11 @@
     	android:layout_alignParentBottom="true"
 		android:text="Cancel" 
 	/>
-	<Button android:id="@+add_item/ok"
+	<Button android:id="@+exalted_add/ok"
     	android:minWidth='70px'
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
-    	android:layout_toLeftOf="@add_item/cancel"
+    	android:layout_toLeftOf="@exalted_add/cancel"
     	android:layout_alignParentBottom="true"
 		android:text="OK" 
 	/>

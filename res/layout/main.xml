@@ -37,7 +37,7 @@
     		android:layout_below="@main/add_dice" 
     		android:text="Roll Details" 
     	/>
-        <TextView android:id="@+main/item_dice"
+        <TextView android:id="@+main/exalted_item_dice"
     		android:layout_width="wrap_content" 
     		android:layout_height="wrap_content" 
         	android:layout_alignParentRight="true"

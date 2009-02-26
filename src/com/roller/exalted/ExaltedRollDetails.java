@@ -21,7 +21,7 @@ public class ExaltedRollDetails implements Serializable {
     public boolean isDamage() { return isDamage; }
     
     CharSequence calculateResults(final int stunt) {
-        final int dice = numDice;
+        final int dice = numDice + stunt;
         final boolean damage = isDamage;
         
         final StringBuilder rolls = new StringBuilder();

@@ -38,12 +38,12 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
         public void onClick(final View v) {
             int stunt = 0;
             switch (v.getId()) {
-            case R.item.stunt3: stunt = 3; break;
-            case R.item.stunt2: stunt = 2; break;
-            case R.item.stunt1: stunt = 1; break;
-            case R.item.stunt0: default:   break;
+            case R.exalted_item.stunt3: stunt = 3; break;
+            case R.exalted_item.stunt2: stunt = 2; break;
+            case R.exalted_item.stunt1: stunt = 1; break;
+            case R.exalted_item.stunt0: default:   break;
             
-            case R.item.delete: 
+            case R.exalted_item.delete: 
                 ExaltedListAdapter.this.remove(details);
                 return;
             }
@@ -51,11 +51,11 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
         }
         
         public void registerListener(final View v) {
-            v.findViewById(R.item.stunt0).setOnClickListener(this);
-            v.findViewById(R.item.stunt1).setOnClickListener(this);
-            v.findViewById(R.item.stunt2).setOnClickListener(this);
-            v.findViewById(R.item.stunt3).setOnClickListener(this);
-            v.findViewById(R.item.delete).setOnClickListener(this);
+            v.findViewById(R.exalted_item.stunt0).setOnClickListener(this);
+            v.findViewById(R.exalted_item.stunt1).setOnClickListener(this);
+            v.findViewById(R.exalted_item.stunt2).setOnClickListener(this);
+            v.findViewById(R.exalted_item.stunt3).setOnClickListener(this);
+            v.findViewById(R.exalted_item.delete).setOnClickListener(this);
         }
     }
     
@@ -63,7 +63,7 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
     private final MainWindow mainWindow;
 
     public ExaltedListAdapter(final MainWindow m) {
-        super(m.getApplicationContext(), R.layout.item, R.item.dummy);
+        super(m.getApplicationContext(), R.layout.exalted_item, R.exalted_item.dummy);
         mainWindow = m;
         listView = (ListView) m.findViewById(R.main.list);
         listView.setAdapter(this);
@@ -72,7 +72,7 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
      @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         final View v = super.getView(position, convertView, parent);
-        final TextView nameView = (TextView) v.findViewById(R.item.name);
+        final TextView nameView = (TextView) v.findViewById(R.exalted_item.name);
         final ExaltedRollDetails r = getItem(position);
         nameView.setText(r.getName() + "\n"
                 + r.getNumDice() + "D10");
@@ -125,14 +125,14 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
     public void showAddDialog() {
         final Dialog d = new Dialog(mainWindow);
         d.setTitle("Add Roll Option");
-        d.setContentView(R.layout.add_item);
+        d.setContentView(R.layout.exalted_add);
 
-        final Button ok = (Button) d.findViewById(R.add_item.ok);
+        final Button ok = (Button) d.findViewById(R.exalted_add.ok);
         ok.setOnClickListener(new OnClickListener() {
             public void onClick(final View v) {
-                final TextView name = (TextView) d.findViewById(R.add_item.name);
-                final TextView dice = (TextView) d.findViewById(R.add_item.dice);
-                final CheckBox damage = (CheckBox) d.findViewById(R.add_item.damage);
+                final TextView name = (TextView) d.findViewById(R.exalted_add.name);
+                final TextView dice = (TextView) d.findViewById(R.exalted_add.dice);
+                final CheckBox damage = (CheckBox) d.findViewById(R.exalted_add.damage);
 
                 ExaltedListAdapter.this.add(new ExaltedRollDetails(
                         name.getText(),
@@ -143,7 +143,7 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
             }
         });
 
-        final Button cancel = (Button) d.findViewById(R.add_item.cancel);
+        final Button cancel = (Button) d.findViewById(R.exalted_add.cancel);
         cancel.setOnClickListener(new OnClickListener() {
             public void onClick(final View v) {
                 d.dismiss();
