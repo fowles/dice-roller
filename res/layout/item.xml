@@ -12,26 +12,21 @@
 		android:padding="2px"
 		android:visibility="gone"
 	/>
-    <TextView android:id="@+item/name"
+    <ImageView android:id="@+item/delete"
+        android:src="@android:drawable/btn_dialog"
+        android:clickable='true'
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
-    	android:layout_alignParentLeft="true"
-		android:text="Default Name" 
-		android:padding="2px"
-	/>
-    <TextView android:id="@+item/dice"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-    	android:layout_below="@item/name"
-    	android:layout_marginLeft='20px'    	
-		android:text="dice" 
-		android:padding="2px"
-	/>
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+    />
 	<LinearLayout 
+	    android:id="@+item/buttons"
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content"
     	android:orientation="horizontal"
     	android:layout_alignParentRight="true"
+    	android:layout_alignParentTop="true"
     	android:padding="0px" 
     >    
     	<Button android:id="@+item/stunt0"
@@ -55,4 +50,14 @@
     		android:text="3" 
     	/>
 	</LinearLayout>
+    <TextView android:id="@+item/name"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent"     	
+    	android:layout_alignParentTop="true"
+    	android:layout_alignParentBottom="true"
+    	android:layout_toRightOf='@item/delete'
+    	android:layout_toLeftOf='@item/buttons'
+		android:text="Default Name" 
+		android:padding="8px"
+	/>
 </RelativeLayout>

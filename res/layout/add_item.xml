@@ -47,6 +47,7 @@
         </TableRow> 
     </TableLayout>
 	<Button android:id="@+add_item/cancel"
+    	android:minWidth='70px'
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 	
     	android:layout_alignParentRight="true"
@@ -54,6 +55,7 @@
 		android:text="Cancel" 
 	/>
 	<Button android:id="@+add_item/ok"
+    	android:minWidth='70px'
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" 
     	android:layout_toLeftOf="@add_item/cancel"

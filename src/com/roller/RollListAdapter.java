@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class RollListAdapter extends ArrayAdapter<RollDetails> {
-    private static final String LOG_TAG = "com.roller.RollListAdapter";
+    private static final String TAG = "com.roller.RollListAdapter";
     private static final String SAVE_FILE = "roll-list-file";
     
     private final ListView listView;
@@ -36,10 +36,9 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         final View v = super.getView(position, convertView, parent);
         final TextView nameView = (TextView) v.findViewById(R.item.name);
-        final TextView diceView = (TextView) v.findViewById(R.item.dice);
         final RollDetails r = getItem(position);
-        nameView.setText(r.getName());
-        diceView.setText(r.getNumDice() + "D10");
+        nameView.setText(r.getName() + "\n"
+                + r.getNumDice() + "D10");
         
         final RollItemListener l = new RollItemListener(mainWindow, r);
         l.registerListener(v);
@@ -89,11 +88,11 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
         } catch (final FileNotFoundException e) {
             // oh well
         } catch (final StreamCorruptedException e) {
-            Log.w(LOG_TAG, e);
+            Log.w(TAG, e);
         } catch (final IOException e) {
-            Log.w(LOG_TAG, e);
+            Log.w(TAG, e);
         } catch (final ClassNotFoundException e) {
-            Log.w(LOG_TAG, e);
+            Log.w(TAG, e);
         }
     }
 
@@ -109,9 +108,9 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
             oos.writeObject(rolls);
             oos.close();
         } catch (final FileNotFoundException e) {
-            Log.w(LOG_TAG, e);
+            Log.w(TAG, e);
         } catch (final IOException e) {
-            Log.w(LOG_TAG, e);
+            Log.w(TAG, e);
         }
     }
 }
