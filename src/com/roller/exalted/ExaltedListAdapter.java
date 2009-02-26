@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.roller.MainWindow;
 import com.roller.R;
+import com.roller.Util;
 
 public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
     private static final String TAG = "com.roller.RollListAdapter";
@@ -47,7 +48,10 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
                 ExaltedListAdapter.this.remove(details);
                 return;
             }
-            mainWindow.setResult(details.calculateResults(stunt));
+            
+            final int[] rolls = Util.rollDice(details.getNumDice() + stunt, 10);
+            final CharSequence res = ExaltedUtil.calculateResult(rolls, details.isDamage());
+            mainWindow.setResult(res);
         }
         
         public void registerListener(final View v) {
