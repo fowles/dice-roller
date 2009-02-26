@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.roller;
+package com.roller.exalted;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,14 +21,17 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class RollListAdapter extends ArrayAdapter<RollDetails> {
+import com.roller.MainWindow;
+import com.roller.R;
+
+public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
     private static final String TAG = "com.roller.RollListAdapter";
     private static final String SAVE_FILE = "roll-list-file";
     
     class RollItemListener implements OnClickListener {
-        private final RollDetails details;
+        private final ExaltedRollDetails details;
         
-        public RollItemListener(final RollDetails roll) {
+        public RollItemListener(final ExaltedRollDetails roll) {
             details = roll;
         }
         
@@ -41,11 +44,10 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
             case R.item.stunt0: default:   break;
             
             case R.item.delete: 
-                RollListAdapter.this.remove(details);
+                ExaltedListAdapter.this.remove(details);
                 return;
             }
-            
-            mainWindow.performRoll(details, stunt);
+            mainWindow.setResult(details.calculateResults(stunt));
         }
         
         public void registerListener(final View v) {
@@ -60,7 +62,7 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
     private final ListView listView;
     private final MainWindow mainWindow;
 
-    public RollListAdapter(final MainWindow m) {
+    public ExaltedListAdapter(final MainWindow m) {
         super(m.getApplicationContext(), R.layout.item, R.item.dummy);
         mainWindow = m;
         listView = (ListView) m.findViewById(R.main.list);
@@ -71,7 +73,7 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         final View v = super.getView(position, convertView, parent);
         final TextView nameView = (TextView) v.findViewById(R.item.name);
-        final RollDetails r = getItem(position);
+        final ExaltedRollDetails r = getItem(position);
         nameView.setText(r.getName() + "\n"
                 + r.getNumDice() + "D10");
         
@@ -85,10 +87,10 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
         clear();
         try {
             final ObjectInputStream ois = new ObjectInputStream(getContext().openFileInput(SAVE_FILE));
-            final RollDetails[] rolls = (RollDetails[]) ois.readObject();
+            final ExaltedRollDetails[] rolls = (ExaltedRollDetails[]) ois.readObject();
             ois.close();
             
-            for (final RollDetails r : rolls) {
+            for (final ExaltedRollDetails r : rolls) {
                 this.add(r);
             }
         } catch (final FileNotFoundException e) {
@@ -104,7 +106,7 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
 
     public void saveList() {
         final int len = getCount();
-        final RollDetails[] rolls = new RollDetails[len];
+        final ExaltedRollDetails[] rolls = new ExaltedRollDetails[len];
         for (int i = 0; i < len; ++i) {
             rolls[i] = getItem(i);
         }
@@ -132,7 +134,7 @@ public class RollListAdapter extends ArrayAdapter<RollDetails> {
                 final TextView dice = (TextView) d.findViewById(R.add_item.dice);
                 final CheckBox damage = (CheckBox) d.findViewById(R.add_item.damage);
 
-                RollListAdapter.this.add(new RollDetails(
+                ExaltedListAdapter.this.add(new ExaltedRollDetails(
                         name.getText(),
                         Integer.parseInt(dice.getText().toString()),
                         damage.isChecked()
