@@ -10,11 +10,10 @@ import com.roller.exalted.ExaltedListAdapter;
 public class MainWindow extends Activity implements View.OnClickListener {
     private ExaltedListAdapter rollAdapter = null;
 
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.calculator);
 
         final View addDiceButton = findViewById(R.main.add_dice);
         addDiceButton.setOnClickListener(this);
@@ -25,13 +24,17 @@ public class MainWindow extends Activity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        rollAdapter.loadList();
+        if (rollAdapter != null) {
+            rollAdapter.loadList();
+        }
     }
     
     @Override
     protected void onPause() {
         super.onPause();
-        rollAdapter.saveList();
+        if (rollAdapter != null) {
+            rollAdapter.saveList();
+        }
     }
 
     public void onClick(final View v) {
