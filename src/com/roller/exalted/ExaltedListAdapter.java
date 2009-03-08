@@ -26,8 +26,9 @@ import com.roller.R;
 import com.roller.Util;
 
 public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
-    private static final String TAG = "com.roller.RollListAdapter";
-    private static final String SAVE_FILE = "roll-list-file";
+    private static final String TAG = "com.roller.ExaltedListAdapter";
+    private static final String SAVE_FILE = "exalted-list-file";
+    private static final int MAX_SIZE = 100;
     
     class RollItemListener implements OnClickListener {
         private final ExaltedRollDetails details;
@@ -37,29 +38,11 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
         }
         
         public void onClick(final View v) {
-            int stunt = 0;
-            switch (v.getId()) {
-            case R.exalted_item.stunt3: stunt = 3; break;
-            case R.exalted_item.stunt2: stunt = 2; break;
-            case R.exalted_item.stunt1: stunt = 1; break;
-            case R.exalted_item.stunt0: default:   break;
-            
-            case R.exalted_item.delete: 
-                ExaltedListAdapter.this.remove(details);
-                return;
-            }
-            
-            final int[] rolls = Util.rollDice(details.getNumDice() + stunt, 10);
-            final CharSequence res = ExaltedUtil.calculateResult(rolls, details.isDamage());
-            mainWindow.setResult(res);
+            ExaltedListAdapter.this.addRoll(details);
         }
         
         public void registerListener(final View v) {
-            v.findViewById(R.exalted_item.stunt0).setOnClickListener(this);
-            v.findViewById(R.exalted_item.stunt1).setOnClickListener(this);
-            v.findViewById(R.exalted_item.stunt2).setOnClickListener(this);
-            v.findViewById(R.exalted_item.stunt3).setOnClickListener(this);
-            v.findViewById(R.exalted_item.delete).setOnClickListener(this);
+            v.setOnClickListener(this);
         }
     }
     
@@ -73,17 +56,28 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
         listView.setAdapter(this);
     }
     
-     @Override
+    public void addRoll(final ExaltedRollDetails roll) {
+        insert(roll, 0);
+        listView.setSelection(0);
+        while (MAX_SIZE < getCount()) {
+            remove(getItem(MAX_SIZE));
+        }
+    }
+    
+    @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         final View v = super.getView(position, convertView, parent);
-        final TextView nameView = (TextView) v.findViewById(R.exalted_item.name);
-        final ExaltedRollDetails r = getItem(position);
-        nameView.setText(r.getName() + "\n"
-                + r.getNumDice() + "D10");
         
+        final TextView details = (TextView) v.findViewById(R.exalted_item.details);
+        final TextView succ = (TextView) v.findViewById(R.exalted_item.successes);
+        
+        final ExaltedRollDetails r = this.getItem(position);
         final RollItemListener l = new RollItemListener(r);
         l.registerListener(v);
         
+        final int[] rolls = Util.rollDice(r.getNumDice(), 10);
+        details.setText(ExaltedUtil.formatDetails(r));
+        succ.setText(ExaltedUtil.calculateResult(rolls, r.isDamage()));
         return v;
     }
      

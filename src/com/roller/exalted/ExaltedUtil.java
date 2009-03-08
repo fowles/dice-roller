@@ -32,4 +32,18 @@ public final class ExaltedUtil {
         result.append("\n").append(rollStr);
         return result;
     }
+    
+    public static CharSequence formatDetails(final ExaltedRollDetails details) {
+        final StringBuilder res = new StringBuilder();
+        res.append(details.getName());
+        if (res.length() > 0) {
+            res.append('\n');
+        }
+        res.append(details.getNumDice());
+        res.append("D10");
+        if (details.isDamage()) {
+            res.append(" Damage");
+        }
+        return res;
+    }
 }

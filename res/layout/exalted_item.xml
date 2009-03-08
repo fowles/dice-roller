@@ -1,63 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:id="@+exalted_item/table"
 	android:layout_width="fill_parent" 
 	android:layout_height="wrap_content"
+	android:stretchColumns='0'
+	android:shrinkColumns='0'
 	android:padding="10px" 
->    
-    <TextView android:id="@+exalted_item/dummy"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-    	android:layout_alignParentLeft="true"
-		android:text="Default Name" 
-		android:padding="2px"
-		android:visibility="gone"
-	/>
-    <ImageView android:id="@+exalted_item/delete"
-        android:src="@android:drawable/btn_dialog"
-        android:clickable='true'
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentTop="true"
-    />
-	<LinearLayout 
-	    android:id="@+exalted_item/buttons"
-    	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal"
-    	android:layout_alignParentRight="true"
-    	android:layout_alignParentTop="true"
-    	android:padding="0px" 
-    >    
-    	<Button android:id="@+exalted_item/stunt0"
-    		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" 
-    		android:text="0" 
+>
+    <TableRow>
+        <TextView android:id="@+exalted_item/successes"
+            android:text="Successes:"
+            android:layout_height="wrap_content"   
+        />
+        <TextView android:id="@+exalted_item/details"
+            android:text="Details:"
+            android:gravity='right'
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"       
+        />  
+        <TextView android:id="@+exalted_item/dummy"
+    		android:visibility="gone"
     	/>
-    	<Button android:id="@+exalted_item/stunt1"
-    		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" 
-    		android:text="1" 
-    	/>
-    	<Button android:id="@+exalted_item/stunt2"
-    		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" 
-    		android:text="2" 
-    	/>
-    	<Button android:id="@+exalted_item/stunt3"
-    		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" 
-    		android:text="3" 
-    	/>
-	</LinearLayout>
-    <TextView android:id="@+exalted_item/name"
-		android:layout_width="fill_parent" 
-		android:layout_height="fill_parent"     	
-    	android:layout_alignParentTop="true"
-    	android:layout_alignParentBottom="true"
-    	android:layout_toRightOf='@exalted_item/delete'
-    	android:layout_toLeftOf='@exalted_item/buttons'
-		android:text="Default Name" 
-		android:padding="8px"
-	/>
-</RelativeLayout>
+    </TableRow> 
+</TableLayout>
