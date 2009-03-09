@@ -1,25 +1,30 @@
 package com.roller;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 
 import com.roller.exalted.ExaltedListAdapter;
 
-public class MainWindow extends Activity {
+public class MainWindow extends ListActivity {
     private ExaltedListAdapter rollAdapter = null;
+    
+    private static final int MENU_ADD_ITEM = Menu.FIRST + 0;
+    private static final int MENU_CLEAR    = Menu.FIRST + 1;
+    private static final int MENU_SETTINGS = Menu.FIRST + 2;
+    private static final int MENU_ABOUT    = Menu.FIRST + 3;
 
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        registerForContextMenu(getListView());
 
         rollAdapter = new ExaltedListAdapter(this);
-        registerForContextMenu(findViewById(R.main.list));
     }
     
     @Override
@@ -47,6 +52,26 @@ public class MainWindow extends Activity {
             return true;
         } else {
             return super.onContextItemSelected(item);
+        }
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        final boolean res = super.onCreateOptionsMenu(menu);
+        menu.add(0, MENU_ADD_ITEM, 0, "Add").setIcon(android.R.drawable.ic_menu_add);
+        menu.add(0, MENU_CLEAR, 0, "Clear").setIcon(android.R.drawable.ic_menu_delete);
+        menu.add(0, MENU_SETTINGS, 0, "Settings").setIcon(android.R.drawable.ic_menu_preferences);
+        menu.add(0, MENU_ABOUT, 0, "About").setIcon(android.R.drawable.ic_menu_info_details);
+        return res;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch(item.getItemId()) {
+        case MENU_ADD_ITEM: rollAdapter.showAddDialog(); return true;
+        case MENU_CLEAR: rollAdapter.clear(); return true;
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 }

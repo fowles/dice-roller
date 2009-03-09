@@ -48,7 +48,7 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implem
     public ExaltedListAdapter(final MainWindow m) {
         super(m.getApplicationContext(), R.layout.exalted_item, R.exalted_item.dummy);
         mainWindow = m;
-        listView = (ListView) m.findViewById(R.main.list);
+        listView = m.getListView();
         listView.setAdapter(this);
         listView.setOnItemClickListener(this);
     }
