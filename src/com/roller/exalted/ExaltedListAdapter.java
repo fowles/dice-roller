@@ -12,8 +12,12 @@ import java.io.StreamCorruptedException;
 import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,16 +25,18 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.roller.MainWindow;
 import com.roller.R;
 
-public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implements OnItemClickListener, OnItemLongClickListener {
+public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implements OnItemClickListener {
     private static final String TAG = "com.roller.ExaltedListAdapter";
     private static final String SAVE_FILE = "exalted-list-file";
     private static final int MAX_SIZE = 100;
+    private static final int MENU_REROLL = Menu.FIRST + 0;
+    private static final int MENU_DELETE = Menu.FIRST + 1;
     
     private final ListView listView;
     private final MainWindow mainWindow;
@@ -41,11 +47,10 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implem
         listView = (ListView) m.findViewById(R.main.list);
         listView.setAdapter(this);
         listView.setOnItemClickListener(this);
-        listView.setOnItemLongClickListener(this);
     }
     
     public void addRoll(final ExaltedRoll.Details details) {
-        ExaltedRoll.Results res = new ExaltedRoll.Results(details);
+        final ExaltedRoll.Results res = new ExaltedRoll.Results(details);
         insert(res, 0);
         listView.setSelection(0);
         while (MAX_SIZE < getCount()) {
@@ -137,11 +142,24 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implem
     }
 
     public void onItemClick(final AdapterView<?> adapter, final View item, final int pos, final long id) {
-        ExaltedListAdapter.this.addRoll(getItem(pos).getDetails());
+        addRoll(getItem(pos).getDetails());
     }
 
-    public boolean onItemLongClick(final AdapterView<?> adapter, final View item, final int pos, final long id) {
-        // TODO Auto-generated method stub
-        return false;
+    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {       
+        menu.add(0, MENU_REROLL, 0, "Roll");
+        menu.add(0, MENU_DELETE, 0, "Delete");
+    }
+    
+    public boolean onContextItemSelected(final MenuItem item) {
+        final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+        case MENU_REROLL: 
+            addRoll(getItem(info.position).getDetails());
+            return true;
+        case MENU_DELETE: 
+            remove(getItem(info.position));
+            return true;
+        default: return false;
+        }
     }
 }
