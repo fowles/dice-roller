@@ -122,7 +122,7 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implem
 
     public void showAddDialog() {
         final Dialog d = new Dialog(mainWindow);
-        d.setTitle("Add Roll Option");
+        d.setTitle("Add Roll");
         d.setContentView(R.layout.exalted_add);
 
         final Button ok = (Button) d.findViewById(R.exalted_add.ok);

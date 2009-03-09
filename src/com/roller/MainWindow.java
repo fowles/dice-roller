@@ -1,5 +1,6 @@
 package com.roller;
 
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -70,6 +71,13 @@ public class MainWindow extends ListActivity {
         switch(item.getItemId()) {
         case MENU_ADD_ITEM: rollAdapter.showAddDialog(); return true;
         case MENU_CLEAR: rollAdapter.clear(); return true;
+        
+        case MENU_ABOUT:
+            final Dialog d = new Dialog(this);
+            d.setTitle("About");
+            d.setContentView(R.layout.about);
+            d.show();
+            return true;
         default:
             return super.onOptionsItemSelected(item);
         }
