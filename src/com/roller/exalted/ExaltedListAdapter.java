@@ -15,36 +15,23 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.roller.MainWindow;
 import com.roller.R;
 import com.roller.Util;
 
-public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
+public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> implements OnItemClickListener, OnItemLongClickListener {
     private static final String TAG = "com.roller.ExaltedListAdapter";
     private static final String SAVE_FILE = "exalted-list-file";
     private static final int MAX_SIZE = 100;
-    
-    class RollItemListener implements OnClickListener {
-        private final ExaltedRollDetails details;
-        
-        public RollItemListener(final ExaltedRollDetails roll) {
-            details = roll;
-        }
-        
-        public void onClick(final View v) {
-            ExaltedListAdapter.this.addRoll(details);
-        }
-        
-        public void registerListener(final View v) {
-            v.setOnClickListener(this);
-        }
-    }
     
     private final ListView listView;
     private final MainWindow mainWindow;
@@ -54,6 +41,8 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
         mainWindow = m;
         listView = (ListView) m.findViewById(R.main.list);
         listView.setAdapter(this);
+        listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
     }
     
     public void addRoll(final ExaltedRollDetails roll) {
@@ -64,17 +53,14 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
         }
     }
     
+    
     @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         final View v = super.getView(position, convertView, parent);
-        
         final TextView details = (TextView) v.findViewById(R.exalted_item.details);
         final TextView succ = (TextView) v.findViewById(R.exalted_item.successes);
         
         final ExaltedRollDetails r = this.getItem(position);
-        final RollItemListener l = new RollItemListener(r);
-        l.registerListener(v);
-        
         final int[] rolls = Util.rollDice(r.getNumDice(), 10);
         details.setText(ExaltedUtil.formatDetails(r));
         succ.setText(ExaltedUtil.calculateResult(rolls, r.isDamage()));
@@ -149,5 +135,14 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> {
         });
 
         d.show();    
+    }
+
+    public void onItemClick(final AdapterView<?> adapter, final View item, final int pos, final long id) {
+        ExaltedListAdapter.this.addRoll(getItem(pos));
+    }
+
+    public boolean onItemLongClick(final AdapterView<?> adapter, final View item, final int pos, final long id) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
