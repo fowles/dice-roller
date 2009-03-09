@@ -26,9 +26,8 @@ import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.roller.MainWindow;
 import com.roller.R;
-import com.roller.Util;
 
-public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> implements OnItemClickListener, OnItemLongClickListener {
+public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implements OnItemClickListener, OnItemLongClickListener {
     private static final String TAG = "com.roller.ExaltedListAdapter";
     private static final String SAVE_FILE = "exalted-list-file";
     private static final int MAX_SIZE = 100;
@@ -45,8 +44,9 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> impleme
         listView.setOnItemLongClickListener(this);
     }
     
-    public void addRoll(final ExaltedRollDetails roll) {
-        insert(roll, 0);
+    public void addRoll(final ExaltedRoll.Details details) {
+        ExaltedRoll.Results res = new ExaltedRoll.Results(details);
+        insert(res, 0);
         listView.setSelection(0);
         while (MAX_SIZE < getCount()) {
             remove(getItem(MAX_SIZE));
@@ -60,10 +60,9 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> impleme
         final TextView details = (TextView) v.findViewById(R.exalted_item.details);
         final TextView succ = (TextView) v.findViewById(R.exalted_item.successes);
         
-        final ExaltedRollDetails r = this.getItem(position);
-        final int[] rolls = Util.rollDice(r.getNumDice(), 10);
-        details.setText(ExaltedUtil.formatDetails(r));
-        succ.setText(ExaltedUtil.calculateResult(rolls, r.isDamage()));
+        final ExaltedRoll.Results r = this.getItem(position);
+        details.setText(r.getDetailsString());
+        succ.setText(r.getResultString());
         return v;
     }
      
@@ -71,10 +70,10 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> impleme
         clear();
         try {
             final ObjectInputStream ois = new ObjectInputStream(getContext().openFileInput(SAVE_FILE));
-            final ExaltedRollDetails[] rolls = (ExaltedRollDetails[]) ois.readObject();
+            final ExaltedRoll.Results[] rolls = (ExaltedRoll.Results[]) ois.readObject();
             ois.close();
             
-            for (final ExaltedRollDetails r : rolls) {
+            for (final ExaltedRoll.Results r : rolls) {
                 this.add(r);
             }
         } catch (final FileNotFoundException e) {
@@ -90,7 +89,7 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> impleme
 
     public void saveList() {
         final int len = getCount();
-        final ExaltedRollDetails[] rolls = new ExaltedRollDetails[len];
+        final ExaltedRoll.Results[] rolls = new ExaltedRoll.Results[len];
         for (int i = 0; i < len; ++i) {
             rolls[i] = getItem(i);
         }
@@ -118,7 +117,7 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> impleme
                 final TextView dice = (TextView) d.findViewById(R.exalted_add.dice);
                 final CheckBox damage = (CheckBox) d.findViewById(R.exalted_add.damage);
 
-                ExaltedListAdapter.this.add(new ExaltedRollDetails(
+                ExaltedListAdapter.this.addRoll(new ExaltedRoll.Details(
                         name.getText(),
                         Integer.parseInt(dice.getText().toString()),
                         damage.isChecked()
@@ -138,7 +137,7 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRollDetails> impleme
     }
 
     public void onItemClick(final AdapterView<?> adapter, final View item, final int pos, final long id) {
-        ExaltedListAdapter.this.addRoll(getItem(pos));
+        ExaltedListAdapter.this.addRoll(getItem(pos).getDetails());
     }
 
     public boolean onItemLongClick(final AdapterView<?> adapter, final View item, final int pos, final long id) {
