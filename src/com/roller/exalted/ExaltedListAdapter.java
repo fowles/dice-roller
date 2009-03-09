@@ -35,8 +35,9 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implem
     private static final String TAG = "com.roller.ExaltedListAdapter";
     private static final String SAVE_FILE = "exalted-list-file";
     private static final int MAX_SIZE = 100;
-    private static final int MENU_REROLL = Menu.FIRST + 0;
-    private static final int MENU_DELETE = Menu.FIRST + 1;
+    private static final int MENU_ROLL_NORMAL = Menu.FIRST + 0;
+    private static final int MENU_ROLL_DAMAGE = Menu.FIRST + 1;
+    private static final int MENU_DELETE      = Menu.FIRST + 2;
     
     private final ListView listView;
     private final MainWindow mainWindow;
@@ -146,18 +147,27 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implem
     }
 
     public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {       
-        menu.add(0, MENU_REROLL, 0, "Roll");
+        menu.add(0, MENU_ROLL_NORMAL, 0, "Roll as normal");
+        menu.add(0, MENU_ROLL_DAMAGE, 0, "Roll as damage");
         menu.add(0, MENU_DELETE, 0, "Delete");
     }
     
     public boolean onContextItemSelected(final MenuItem item) {
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        final int pos = info.position;
+        final ExaltedRoll.Results rollResults = getItem(pos);
+        final ExaltedRoll.Details rollDetails = rollResults.getDetails();
         switch (item.getItemId()) {
-        case MENU_REROLL: 
-            addRoll(getItem(info.position).getDetails());
+        case MENU_ROLL_NORMAL: 
+        case MENU_ROLL_DAMAGE: 
+            final ExaltedRoll.Details newRoll = new ExaltedRoll.Details(
+                    rollDetails.getName(),
+                    rollDetails.getNumDice(),
+                    item.getItemId() == MENU_ROLL_DAMAGE);
+            addRoll(newRoll);
             return true;
         case MENU_DELETE: 
-            remove(getItem(info.position));
+            remove(rollResults);
             return true;
         default: return false;
         }
