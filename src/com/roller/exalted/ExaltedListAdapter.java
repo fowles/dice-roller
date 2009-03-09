@@ -34,7 +34,10 @@ import com.roller.R;
 public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implements OnItemClickListener {
     private static final String TAG = "com.roller.ExaltedListAdapter";
     private static final String SAVE_FILE = "exalted-list-file";
+    
     private static final int MAX_SIZE = 100;
+    private static final int DEFAULT_FILL_SIZE = 20;
+    
     private static final int MENU_ROLL_NORMAL = Menu.FIRST + 0;
     private static final int MENU_ROLL_DAMAGE = Menu.FIRST + 1;
     private static final int MENU_DELETE      = Menu.FIRST + 2;
@@ -90,6 +93,12 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implem
             Log.w(TAG, e);
         } catch (final ClassNotFoundException e) {
             Log.w(TAG, e);
+        }
+        
+        if (isEmpty()) {
+            for (int i = 1; i <= DEFAULT_FILL_SIZE; ++i) {
+                addRoll(new ExaltedRoll.Details("", i, false));
+            }
         }
     }
 
@@ -157,13 +166,14 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implem
         final int pos = info.position;
         final ExaltedRoll.Results rollResults = getItem(pos);
         final ExaltedRoll.Details rollDetails = rollResults.getDetails();
-        switch (item.getItemId()) {
+        final int itemId = item.getItemId();
+        switch (itemId) {
         case MENU_ROLL_NORMAL: 
         case MENU_ROLL_DAMAGE: 
             final ExaltedRoll.Details newRoll = new ExaltedRoll.Details(
                     rollDetails.getName(),
                     rollDetails.getNumDice(),
-                    item.getItemId() == MENU_ROLL_DAMAGE);
+                    itemId == MENU_ROLL_DAMAGE);
             addRoll(newRoll);
             return true;
         case MENU_DELETE: 
