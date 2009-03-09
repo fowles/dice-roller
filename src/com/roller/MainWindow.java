@@ -60,7 +60,7 @@ public class MainWindow extends ListActivity {
         final boolean res = super.onCreateOptionsMenu(menu);
         menu.add(0, MENU_ADD_ITEM, 0, "Add").setIcon(android.R.drawable.ic_menu_add);
         menu.add(0, MENU_CLEAR, 0, "Clear").setIcon(android.R.drawable.ic_menu_delete);
-        menu.add(0, MENU_SETTINGS, 0, "Settings").setIcon(android.R.drawable.ic_menu_preferences);
+        //menu.add(0, MENU_SETTINGS, 0, "Settings").setIcon(android.R.drawable.ic_menu_preferences);
         menu.add(0, MENU_ABOUT, 0, "About").setIcon(android.R.drawable.ic_menu_info_details);
         return res;
     }

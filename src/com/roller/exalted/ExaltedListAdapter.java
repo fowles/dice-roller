@@ -132,11 +132,15 @@ public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implem
                 final TextView dice = (TextView) d.findViewById(R.exalted_add.dice);
                 final CheckBox damage = (CheckBox) d.findViewById(R.exalted_add.damage);
 
-                ExaltedListAdapter.this.addRoll(new ExaltedRoll.Details(
-                        name.getText(),
-                        Integer.parseInt(dice.getText().toString()),
-                        damage.isChecked()
-                ));
+                try {
+                    ExaltedListAdapter.this.addRoll(new ExaltedRoll.Details(
+                            name.getText(),
+                            Integer.parseInt(dice.getText().toString()),
+                            damage.isChecked()
+                    ));
+                } catch (final NumberFormatException nfe) {
+                    Log.w(TAG, nfe);
+                }
                 d.dismiss();
             }
         });
