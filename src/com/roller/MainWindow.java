@@ -22,9 +22,6 @@ public class MainWindow extends Activity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        registerForContextMenu(findViewById(R.main.list));
-
         system = new ExaltedSystem(this);
     }
     

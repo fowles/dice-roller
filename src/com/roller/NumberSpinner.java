@@ -39,6 +39,7 @@ public class NumberSpinner extends LinearLayout implements OnClickListener {
         
         numberEdit = new EditText(context, attrs);
         numberEdit.setKeyListener(new DigitsKeyListener());
+        numberEdit.setText("8");
         
         minusView.setOnClickListener(this);
         plusView.setOnClickListener(this);

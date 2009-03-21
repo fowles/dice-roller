@@ -28,9 +28,10 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.roller.DiceSystem;
 import com.roller.MainWindow;
+import com.roller.NumberSpinner;
 import com.roller.R;
 
-public class ExaltedSystem implements DiceSystem, OnItemClickListener  {
+public class ExaltedSystem implements DiceSystem, OnItemClickListener, OnClickListener  {
     private static final String TAG = "com.roller.exalted.ExaltedSystem";
     private static final String SAVE_FILE = "exalted-list-file";
     
@@ -44,13 +45,25 @@ public class ExaltedSystem implements DiceSystem, OnItemClickListener  {
     private final ExaltedListAdapter adapter;
     private final ListView list;
     private final MainWindow mainWindow;
+    private final NumberSpinner spinner;
 
     public ExaltedSystem(final MainWindow m) {
-        mainWindow = m;
-        list = (ListView) m.findViewById(R.main.list);
-        adapter = new ExaltedListAdapter(m);
+        m.setContentView(R.layout.exalted);
+        
+        final ListView list = (ListView) m.findViewById(R.exalted.list);
+        m.registerForContextMenu(list);
+        
+        m.findViewById(R.exalted.roll_damage).setOnClickListener(this);
+        m.findViewById(R.exalted.roll_normal).setOnClickListener(this);
+        
+        final ExaltedListAdapter adapter = new ExaltedListAdapter(m);
         list.setAdapter(adapter);
         list.setOnItemClickListener(this);
+        
+        this.spinner = (NumberSpinner) m.findViewById(R.exalted.number_spinner);
+        this.adapter = adapter;
+        this.list = list;
+        this.mainWindow = m;
     }
     
     public void addRoll(final ExaltedRoll.Details details) {
@@ -179,5 +192,12 @@ public class ExaltedSystem implements DiceSystem, OnItemClickListener  {
     
     public void onItemClick(final AdapterView<?> a, final View item, final int pos, final long id) {
         addRoll(adapter.getItem(pos).getDetails());
+    }
+
+    public void onClick(final View v) {
+        addRoll(new ExaltedRoll.Details(
+                "",
+                spinner.getValue(), 
+                v.getId() == R.exalted.roll_damage));
     }
 }
