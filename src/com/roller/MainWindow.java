@@ -1,7 +1,7 @@
 package com.roller;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -11,7 +11,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 
 import com.roller.exalted.ExaltedListAdapter;
 
-public class MainWindow extends ListActivity {
+public class MainWindow extends Activity {
     private ExaltedListAdapter rollAdapter = null;
     
     private static final int MENU_ADD_ITEM = Menu.FIRST + 0;
@@ -23,7 +23,7 @@ public class MainWindow extends ListActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        registerForContextMenu(getListView());
+        registerForContextMenu(findViewById(R.main.list));
 
         rollAdapter = new ExaltedListAdapter(this);
     }
