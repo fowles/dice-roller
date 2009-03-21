@@ -9,10 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 
-import com.roller.exalted.ExaltedListAdapter;
+import com.roller.exalted.ExaltedSystem;
 
 public class MainWindow extends Activity {
-    private ExaltedListAdapter rollAdapter = null;
+    private DiceSystem system = null;
     
     private static final int MENU_ADD_ITEM = Menu.FIRST + 0;
     private static final int MENU_CLEAR    = Menu.FIRST + 1;
@@ -25,31 +25,31 @@ public class MainWindow extends Activity {
         setContentView(R.layout.main);
         registerForContextMenu(findViewById(R.main.list));
 
-        rollAdapter = new ExaltedListAdapter(this);
+        system = new ExaltedSystem(this);
     }
     
     @Override
     protected void onResume() {
         super.onResume();
-        rollAdapter.loadList();
+        system.loadState();
     }
     
     @Override
     protected void onPause() {
         super.onPause();
-        rollAdapter.saveList();
+        system.saveState();
     }
     
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
             final ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        rollAdapter.onCreateContextMenu(menu, v, menuInfo);
+        system.onCreateContextMenu(menu, v, menuInfo);
     }
     
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        if (rollAdapter.onContextItemSelected(item)) {
+        if (system.onContextItemSelected(item)) {
             return true;
         } else {
             return super.onContextItemSelected(item);
@@ -69,8 +69,8 @@ public class MainWindow extends Activity {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch(item.getItemId()) {
-        case MENU_ADD_ITEM: rollAdapter.showAddDialog(); return true;
-        case MENU_CLEAR: rollAdapter.clear(); return true;
+        case MENU_ADD_ITEM: system.showAddDialog(); return true;
+        case MENU_CLEAR: system.clearState(); return true;
         
         case MENU_ABOUT:
             final Dialog d = new Dialog(this);
