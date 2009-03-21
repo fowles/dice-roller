@@ -32,7 +32,7 @@ import com.roller.MainWindow;
 import com.roller.R;
 
 public class ExaltedListAdapter extends ArrayAdapter<ExaltedRoll.Results> implements OnItemClickListener {
-    private static final String TAG = "com.roller.ExaltedListAdapter";
+    private static final String TAG = "com.roller.exalted.ExaltedListAdapter";
     private static final String SAVE_FILE = "exalted-list-file";
     
     private static final int MAX_SIZE = 100;
