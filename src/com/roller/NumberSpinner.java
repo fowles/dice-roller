@@ -33,16 +33,16 @@ public class NumberSpinner extends LinearLayout implements OnClickListener {
         
         minusView = new ImageView(context, attrs);
         minusView.setImageBitmap(minusBMP);
+        minusView.setOnClickListener(this);
         
         plusView = new ImageView(context, attrs);
         plusView.setImageBitmap(plusBMP);
+        plusView.setOnClickListener(this);
         
         numberEdit = new EditText(context, attrs);
         numberEdit.setKeyListener(new DigitsKeyListener());
         numberEdit.setText("8");
         
-        minusView.setOnClickListener(this);
-        plusView.setOnClickListener(this);
         
         addView(minusView);
         addView(numberEdit);

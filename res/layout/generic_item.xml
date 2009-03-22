@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:id="@+exalted_item/table"
+    android:id="@+generic_item/table"
 	android:layout_width="fill_parent" 
 	android:layout_height="wrap_content"
 	android:stretchColumns='0'
@@ -8,17 +8,17 @@
 	android:padding="10px" 
 >
     <TableRow>
-        <TextView android:id="@+exalted_item/successes"
-            android:text="Successes:"
+        <TextView android:id="@+generic_item/summary"
+            android:text="Summary:"
             android:layout_height="wrap_content"   
         />
-        <TextView android:id="@+exalted_item/details"
+        <TextView android:id="@+generic_item/details"
             android:text="Details:"
             android:gravity='right'
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"       
         />  
-        <TextView android:id="@+exalted_item/dummy"
+        <TextView android:id="@+generic_item/dummy"
     		android:visibility="gone"
     	/>
     </TableRow> 
