@@ -33,8 +33,10 @@ public class MainWindow extends Activity {
     }
     
     public void loadPreferences() {
-        final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        switch (prefs.getInt(RULE_SYSTEM_PREF, -1)) {
+        if (system != null) {
+            system.saveState();
+        }
+        switch (getSystemPref()) {
         case R.preferences.exalted:
             system = new ExaltedSystem(this);
             break;
@@ -45,6 +47,18 @@ public class MainWindow extends Activity {
             break;
         }
         system.loadState();
+    }
+    
+    public void putSystemPref(final int sys) {
+        final SharedPreferences pref = MainWindow.this.getPreferences(MODE_PRIVATE);
+        final SharedPreferences.Editor edit = pref.edit();
+        edit.putInt(RULE_SYSTEM_PREF, sys);
+        edit.commit();
+    }
+    
+    public int getSystemPref() {
+        final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        return prefs.getInt(RULE_SYSTEM_PREF, -1);
     }
     
     @Override
@@ -108,17 +122,15 @@ public class MainWindow extends Activity {
         final Dialog d = new Dialog(this);
         d.setTitle("Select System");
         d.setContentView(R.layout.preferences);
+        final RadioGroup system = (RadioGroup) d.findViewById(R.preferences.system_group);
+        system.check(getSystemPref());
 
         final Button ok = (Button) d.findViewById(R.preferences.ok);
         ok.setOnClickListener(new OnClickListener() {
             public void onClick(final View v) {
-                final RadioGroup system = (RadioGroup) d.findViewById(R.preferences.system_group);
-                final SharedPreferences pref = MainWindow.this.getPreferences(MODE_PRIVATE);
-                final SharedPreferences.Editor edit = pref.edit();
-                edit.putInt(RULE_SYSTEM_PREF, system.getCheckedRadioButtonId());
-                edit.commit();
-                d.dismiss();
+                MainWindow.this.putSystemPref(system.getCheckedRadioButtonId());
                 loadPreferences();
+                d.dismiss();
             }
         });
 
