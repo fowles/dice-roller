@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation='vertical'
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation='horizontal'
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+    >
+        <TableRow>
+            <TextView 
+                android:text="Dice:"
+                android:layout_height="wrap_content"   
+            />
+            <com.roller.NumberSpinner
+                 android:id="@+generic/dice_spinner"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+            />
+        </TableRow>
+        <TableRow>
+            <TextView 
+                android:text="Sides:"
+                android:layout_height="wrap_content"   
+            />
+            <com.roller.NumberSpinner
+                 android:id="@+generic/sides_spinner"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+            />
+            <Button android:id="@+generic/roll"
+                 android:layout_width="wrap_content" 
+                 android:layout_height="wrap_content" 
+                 android:text="Roll" 
+            />
+        </TableRow>
+    </TableLayout>
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+generic/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+    />    
+</LinearLayout>
