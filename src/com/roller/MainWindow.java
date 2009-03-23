@@ -1,7 +1,9 @@
 package com.roller;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -9,9 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.RadioGroup;
 
 import com.roller.exalted.ExaltedSystem;
 import com.roller.generic.GenericSystem;
@@ -26,6 +25,13 @@ public class MainWindow extends Activity {
     
     private static final String RULE_SYSTEM_PREF = "rule-system";
     
+    private static final String GENERIC_SYSTEM = "Generic";
+    private static final String EXALTED_SYSTEM = "Exalted";
+    private static final String[] SYSTEMS = new String[] {
+        GENERIC_SYSTEM,
+        EXALTED_SYSTEM,
+    };
+    
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,29 +42,28 @@ public class MainWindow extends Activity {
         if (system != null) {
             system.saveState();
         }
-        switch (getSystemPref()) {
-        case R.preferences.exalted:
+        
+        final String pref = getSystemPref();
+        if (pref.equals(EXALTED_SYSTEM)) {
             system = new ExaltedSystem(this);
-            break;
-         
-        case R.preferences.generic:
-        default:
+        } else if (pref.equals(GENERIC_SYSTEM)) {
             system = new GenericSystem(this);
-            break;
+        } else {
+            system = new GenericSystem(this);
         }
         system.loadState();
     }
     
-    public void putSystemPref(final int sys) {
+    public void putSystemPref(final String sys) {
         final SharedPreferences pref = MainWindow.this.getPreferences(MODE_PRIVATE);
         final SharedPreferences.Editor edit = pref.edit();
-        edit.putInt(RULE_SYSTEM_PREF, sys);
+        edit.putString(RULE_SYSTEM_PREF, sys);
         edit.commit();
     }
     
-    public int getSystemPref() {
+    public String getSystemPref() {
         final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        return prefs.getInt(RULE_SYSTEM_PREF, -1);
+        return prefs.getString(RULE_SYSTEM_PREF, GENERIC_SYSTEM);
     }
     
     @Override
@@ -119,28 +124,26 @@ public class MainWindow extends Activity {
     }
     
     public void showPreferences() {
-        final Dialog d = new Dialog(this);
-        d.setTitle("Select System");
-        d.setContentView(R.layout.preferences);
-        final RadioGroup system = (RadioGroup) d.findViewById(R.preferences.system_group);
-        system.check(getSystemPref());
-
-        final Button ok = (Button) d.findViewById(R.preferences.ok);
-        ok.setOnClickListener(new OnClickListener() {
-            public void onClick(final View v) {
-                MainWindow.this.putSystemPref(system.getCheckedRadioButtonId());
+        final String sys = getSystemPref();
+        int cur = 0;
+        for (; cur < SYSTEMS.length; ++cur) {
+            if (sys.equals(SYSTEMS[cur])) {
+                break;
+            }
+        }
+        
+        final AlertDialog.Builder db = new AlertDialog.Builder(this);
+        db.setTitle("Select System");
+        db.setSingleChoiceItems(new CharSequence[] {
+                GENERIC_SYSTEM,
+                EXALTED_SYSTEM,
+        }, cur, new DialogInterface.OnClickListener() {
+            public void onClick(final DialogInterface dialog, final int which) {
+                MainWindow.this.putSystemPref(SYSTEMS[which]);
                 loadPreferences();
-                d.dismiss();
+                dialog.dismiss();
             }
         });
-
-        final Button cancel = (Button) d.findViewById(R.preferences.cancel);
-        cancel.setOnClickListener(new OnClickListener() {
-            public void onClick(final View v) {
-                d.dismiss();
-            }
-        });
-
-        d.show();    
+        db.show();
     }
 }
