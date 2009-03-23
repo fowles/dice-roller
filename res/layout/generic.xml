@@ -8,9 +8,11 @@
         android:orientation='horizontal'
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+    	android:stretchColumns="2"
     >
-        <TableRow>
+        <TableRow
+            android:gravity="center_vertical"
+        >
             <TextView 
                 android:text="Dice:"
                 android:layout_height="wrap_content"   
@@ -20,8 +22,14 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
             />
+            <View
+                 android:layout_width="0px" 
+                 android:layout_height="0px" 
+            />
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:gravity="center_vertical"
+        >
             <TextView 
                 android:text="Sides:"
                 android:layout_height="wrap_content"   
@@ -31,8 +39,12 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
             />
+            <View
+                 android:layout_width="0px" 
+                 android:layout_height="0px" 
+            />
             <Button android:id="@+generic/roll"
-                 android:layout_width="wrap_content" 
+                 android:layout_width="70px" 
                  android:layout_height="wrap_content" 
                  android:text="Roll" 
             />
