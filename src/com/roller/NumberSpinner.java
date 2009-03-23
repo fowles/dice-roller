@@ -8,13 +8,15 @@ import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class NumberSpinner extends LinearLayout implements OnClickListener {
+public class NumberSpinner extends LinearLayout implements OnClickListener, OnKeyListener {
     private static final String TAG = "com.roller.NumberSpinner";
     
     private final ImageView minusView;
@@ -43,10 +45,11 @@ public class NumberSpinner extends LinearLayout implements OnClickListener {
         numberEdit.setKeyListener(new DigitsKeyListener());
         numberEdit.setText("8");
         
-        
         addView(minusView);
         addView(numberEdit);
         addView(plusView);
+        
+        numberEdit.setOnKeyListener(this);
     }
     
     public int getValue() {
@@ -70,5 +73,32 @@ public class NumberSpinner extends LinearLayout implements OnClickListener {
         } else {
             Log.w(TAG, "Unknown view: " + v);
         }
+    }
+
+    public boolean onKey(final View v, final int keyCode, final KeyEvent event) {
+        if (event.getAction() != KeyEvent.ACTION_DOWN) {
+            return false;
+        }
+        
+        final EditText numberEdit = this.numberEdit;
+        final int selectionStart = numberEdit.getSelectionStart();
+        final int selectionEnd = numberEdit.getSelectionEnd();
+        
+        switch (keyCode) {
+        case KeyEvent.KEYCODE_DPAD_LEFT:  
+            if (selectionStart <= 0) {
+                setValue(getValue() - 1);
+                return true;
+            }
+            break;
+        case KeyEvent.KEYCODE_DPAD_RIGHT:
+            if (selectionEnd >= numberEdit.length()) {
+                setValue(getValue() + 1);
+                numberEdit.setSelection(selectionEnd);
+                return true;
+            }
+            break;
+        }
+        return false;
     }
 }
