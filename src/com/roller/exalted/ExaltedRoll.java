@@ -61,10 +61,6 @@ public class ExaltedRoll {
             final Details details = this.details;
             
             final StringBuilder res = new StringBuilder();
-            res.append(details.getName());
-            if (res.length() > 0) {
-                res.append('\n');
-            }
             res.append(details.getNumDice());
             res.append("D10");
             if (details.isDamage()) {
@@ -76,17 +72,14 @@ public class ExaltedRoll {
     }
     
     public static class Details implements Serializable {
-        private final String name;
         private final int numDice;
         private final boolean isDamage;
         
-        public Details(final CharSequence n, final int d, final boolean damage) {
-            name = n.toString();
+        public Details(final int d, final boolean damage) {
             numDice = d;
             isDamage = damage;
         }
         
-        public String getName() { return name; }
         public int getNumDice() { return numDice; }
         public boolean isDamage() { return isDamage; }
     }

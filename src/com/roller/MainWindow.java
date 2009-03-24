@@ -18,10 +18,9 @@ import com.roller.generic.GenericSystem;
 public class MainWindow extends Activity {
     private DiceSystem system = null;
     
-    private static final int MENU_ADD_ITEM = Menu.FIRST + 0;
-    private static final int MENU_CLEAR    = Menu.FIRST + 1;
-    private static final int MENU_SETTINGS = Menu.FIRST + 2;
-    private static final int MENU_ABOUT    = Menu.FIRST + 3;
+    private static final int MENU_CLEAR    = Menu.FIRST + 0;
+    private static final int MENU_SETTINGS = Menu.FIRST + 1;
+    private static final int MENU_ABOUT    = Menu.FIRST + 2;
     
     private static final String RULE_SYSTEM_PREF = "rule-system";
     
@@ -97,7 +96,6 @@ public class MainWindow extends Activity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         final boolean res = super.onCreateOptionsMenu(menu);
-        menu.add(0, MENU_ADD_ITEM, 0, "Add").setIcon(android.R.drawable.ic_menu_add);
         menu.add(0, MENU_CLEAR, 0, "Clear").setIcon(android.R.drawable.ic_menu_delete);
         menu.add(0, MENU_SETTINGS, 0, "Settings").setIcon(android.R.drawable.ic_menu_preferences);
         menu.add(0, MENU_ABOUT, 0, "About").setIcon(android.R.drawable.ic_menu_info_details);
@@ -107,7 +105,6 @@ public class MainWindow extends Activity {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch(item.getItemId()) {
-        case MENU_ADD_ITEM: system.showAddDialog(); return true;
         case MENU_CLEAR: system.clearState(); return true;
         case MENU_SETTINGS: showPreferences(); return true;
         case MENU_ABOUT: showAbout(); return true;

@@ -40,10 +40,6 @@ public class GenericRoll {
             final Details details = this.details;
             
             final StringBuilder res = new StringBuilder();
-            res.append(details.getName());
-            if (res.length() > 0) {
-                res.append('\n');
-            }
             res.append(details.getNumDice());
             res.append("D");
             res.append(details.getNumSides());
@@ -53,18 +49,15 @@ public class GenericRoll {
     }
     
     public static class Details implements Serializable {
-        private final String name;
         private final int numDice;
         private final int numSides;
         
-        public Details(final CharSequence name, final int dice, final int sides) {
+        public Details(final int dice, final int sides) {
             this.numDice = dice;
             this.numSides = sides;
-            this.name = name.toString();
         }
         
         public int getNumDice() { return numDice; }
         public int getNumSides() { return numSides; }
-        public String getName() { return name; }
     }
 }

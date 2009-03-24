@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -19,10 +18,7 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -101,7 +97,7 @@ public class ExaltedSystem implements DiceSystem, OnItemClickListener, OnClickLi
         
         if (adapter.isEmpty()) {
             for (int i = 1; i <= DEFAULT_FILL_SIZE; ++i) {
-                addRoll(new ExaltedRoll.Details("", i, false));
+                addRoll(new ExaltedRoll.Details(i, false));
             }
         }
     }
@@ -129,41 +125,6 @@ public class ExaltedSystem implements DiceSystem, OnItemClickListener, OnClickLi
         adapter.clear();
     }
 
-    public void showAddDialog() {
-        final Dialog d = new Dialog(mainWindow);
-        d.setTitle("Add Roll");
-        d.setContentView(R.layout.exalted_add);
-
-        final Button ok = (Button) d.findViewById(R.exalted_add.ok);
-        ok.setOnClickListener(new OnClickListener() {
-            public void onClick(final View v) {
-                final TextView name = (TextView) d.findViewById(R.exalted_add.name);
-                final TextView dice = (TextView) d.findViewById(R.exalted_add.dice);
-                final CheckBox damage = (CheckBox) d.findViewById(R.exalted_add.damage);
-
-                try {
-                    ExaltedSystem.this.addRoll(new ExaltedRoll.Details(
-                            name.getText(),
-                            Integer.parseInt(dice.getText().toString()),
-                            damage.isChecked()
-                    ));
-                } catch (final NumberFormatException nfe) {
-                    Log.w(TAG, nfe);
-                }
-                d.dismiss();
-            }
-        });
-
-        final Button cancel = (Button) d.findViewById(R.exalted_add.cancel);
-        cancel.setOnClickListener(new OnClickListener() {
-            public void onClick(final View v) {
-                d.dismiss();
-            }
-        });
-
-        d.show();    
-    }
-
     public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {       
         menu.add(0, MENU_ROLL_NORMAL, 0, "Roll as normal");
         menu.add(0, MENU_ROLL_DAMAGE, 0, "Roll as damage");
@@ -180,7 +141,6 @@ public class ExaltedSystem implements DiceSystem, OnItemClickListener, OnClickLi
         case MENU_ROLL_NORMAL: 
         case MENU_ROLL_DAMAGE: 
             final ExaltedRoll.Details newRoll = new ExaltedRoll.Details(
-                    rollDetails.getName(),
                     rollDetails.getNumDice(),
                     itemId == MENU_ROLL_DAMAGE);
             addRoll(newRoll);
@@ -198,7 +158,6 @@ public class ExaltedSystem implements DiceSystem, OnItemClickListener, OnClickLi
 
     public void onClick(final View v) {
         addRoll(new ExaltedRoll.Details(
-                "",
                 spinner.getValue(), 
                 v.getId() == R.exalted.roll_damage));
     }
