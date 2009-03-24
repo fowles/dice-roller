@@ -6,6 +6,29 @@ import com.roller.Util;
 
 @SuppressWarnings("serial")
 public class ExaltedRoll {
+    public static boolean isBotch(final int[] rolls) {
+        boolean botchable = false;
+        final int len = rolls.length;
+        for (int i = 0; i < len; ++i) {
+            final int r = rolls[i];
+            if (r >= 7) { return false; }
+            if (r == 1) { botchable = true; }
+        }
+        return botchable;
+    }
+    
+    public static int countSuccesses(final int[] rolls, final boolean isDamage) {
+        int successes = 0;
+        final int len = rolls.length;
+        for (int i = 0; i < len; ++i) {
+            final int r = rolls[i];
+            if (r >= 7) { 
+                successes += !isDamage && r == 10 ? 2 : 1;
+            }
+        }
+        return successes;
+    }
+    
     public static class Results implements Serializable {
         private final Details details;
         private final int[] rolls;
@@ -17,19 +40,8 @@ public class ExaltedRoll {
             final int[] rolls = Util.rollDice(len, 10);
             final boolean damage = d.isDamage();
             
-            int successes = 0;
-            boolean botchable = false;
-            for (int i = 0; i < len; ++i) {
-                final int r = rolls[i];
-                
-                if (r == 1) { botchable = true; } 
-                if (r >= 7) {
-                    successes += !damage && r == 10 ? 2 : 1;
-                }
-            }
-            
-            this.botch = botchable && successes == 0;
-            this.successes = successes;
+            this.successes = ExaltedRoll.countSuccesses(rolls, damage);
+            this.botch = ExaltedRoll.isBotch(rolls);
             this.details = d;
             this.rolls = rolls;
         }
