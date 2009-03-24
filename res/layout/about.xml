@@ -20,14 +20,28 @@
 		android:text='Dice Roller' 
 		style="@style/Header"
 	/>
-	<TextView
-	    android:id='@+about/version'
-	    android:layout_below="@about/title"
-	    android:layout_toRightOf="@about/icon"
-	    android:layout_alignParentRight="true"
-		android:text='@string/app_ver' 
-		style="@style/Detail"
-	/>
+	<LinearLayout
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 	
+    	    android:layout_below="@about/title"
+    	    android:layout_toRightOf="@about/icon"
+    	    android:layout_alignParentRight="true"
+    	    android:gravity='center'
+	>
+    	<TextView
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 	
+    		android:paddingRight='3px'
+    		android:text='@string/version' 
+    		style="@style/Detail"
+    	/>
+    	<TextView
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 	
+    		android:text='@string/app_ver' 
+    		style="@style/Detail"
+    	/>
+	</LinearLayout>
     <TextView
 	    android:id='@+about/copywrite'
 	    android:layout_below="@about/icon"

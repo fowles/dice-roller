@@ -2,13 +2,9 @@
 <resources>
     
     <string name="app_name">Dice Roller</string>
-    <string name="app_ver">Version 1.0.0</string> 
+    <string name="version">Version</string> 
+    <string name="app_ver">1.1.0</string> 
     <string name="app_copyright">Copyright &#169; 2009 Matt Fowles</string>
     <string name="app_copyright_rights">All rights reserved</string>
-    <string name="description">
-A dice rolling program that calculates results for different game systems.
-Current systems:
-    * Exalted
-        * Counts successes/botches for damage and non-damage rolls     
-    </string>
+    <string name="description">A multi-system dice rolling app</string>
 </resources>
