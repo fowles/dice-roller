@@ -64,6 +64,11 @@ public class NumberSpinner extends LinearLayout implements OnClickListener, OnKe
         if (i < 1) { i = 1; }
         numberEdit.setText(Integer.toString(i));
     }
+    
+    @Override
+    public void setOnClickListener(final OnClickListener l) {
+        numberEdit.setOnClickListener(l);
+    }
 
     public void onClick(final View v) {
         if (v == minusView) {

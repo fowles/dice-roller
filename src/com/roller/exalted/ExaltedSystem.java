@@ -53,14 +53,16 @@ public class ExaltedSystem implements DiceSystem, OnItemClickListener, OnClickLi
         final ListView list = (ListView) m.findViewById(R.exalted.list);
         m.registerForContextMenu(list);
         
-        m.findViewById(R.exalted.roll_damage).setOnClickListener(this);
-        m.findViewById(R.exalted.roll_normal).setOnClickListener(this);
-        
         final ExaltedListAdapter adapter = new ExaltedListAdapter(m);
         list.setAdapter(adapter);
         list.setOnItemClickListener(this);
         
-        this.spinner = (NumberSpinner) m.findViewById(R.exalted.number_spinner);
+        final NumberSpinner spinner = (NumberSpinner) m.findViewById(R.exalted.number_spinner);
+        spinner.setOnClickListener(this);
+        m.findViewById(R.exalted.roll_damage).setOnClickListener(this);
+        m.findViewById(R.exalted.roll_normal).setOnClickListener(this);
+        
+        this.spinner = spinner;
         this.adapter = adapter;
         this.list = list;
         this.mainWindow = m;

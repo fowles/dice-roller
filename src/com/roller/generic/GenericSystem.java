@@ -52,14 +52,19 @@ public class GenericSystem implements DiceSystem, OnItemClickListener, OnClickLi
         final ListView list = (ListView) m.findViewById(R.generic.list);
         m.registerForContextMenu(list);
         
+        final NumberSpinner diceSpinner = (NumberSpinner) m.findViewById(R.generic.dice_spinner);
+        final NumberSpinner sideSpinner = (NumberSpinner) m.findViewById(R.generic.sides_spinner);
+        
+        diceSpinner.setOnClickListener(this);
+        sideSpinner.setOnClickListener(this);
         m.findViewById(R.generic.roll).setOnClickListener(this);
         
         final GenericListAdapter adapter = new GenericListAdapter(m);
         list.setAdapter(adapter);
         list.setOnItemClickListener(this);
         
-        this.diceSpinner = (NumberSpinner) m.findViewById(R.generic.dice_spinner);
-        this.sidesSpinner = (NumberSpinner) m.findViewById(R.generic.sides_spinner);
+        this.diceSpinner = diceSpinner;
+        this.sidesSpinner = sideSpinner;
         this.adapter = adapter;
         this.list = list;
         this.mainWindow = m;
