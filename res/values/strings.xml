@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
     <string name="app_name">Dice Roller</string>
     <string name="version">Version</string> 
-    <string name="app_ver">1.1.0</string> 
+    <string name="app_ver">1.1.1</string> 
     <string name="app_copyright">Copyright &#169; 2009 Matt Fowles</string>
     <string name="app_copyright_rights">All rights reserved</string>
     <string name="description">A multi-system dice rolling app</string>
+    <string name="exalted">Exalted</string>
+    <string name="generic">Generic</string>
 </resources>

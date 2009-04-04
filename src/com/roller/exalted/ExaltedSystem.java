@@ -31,6 +31,9 @@ public class ExaltedSystem implements DiceSystem, OnItemClickListener, OnClickLi
     private static final String TAG = "com.roller.exalted.ExaltedSystem";
     private static final String SAVE_FILE = "exalted-list-file";
     
+    public static final int SYSTEM_ID = R.string.exalted;
+    public int getSystemId() { return SYSTEM_ID; }
+    
     private static final int MAX_SIZE = 100;
     private static final int DEFAULT_FILL_SIZE = 20;
     
@@ -42,6 +45,7 @@ public class ExaltedSystem implements DiceSystem, OnItemClickListener, OnClickLi
     private final ListView list;
     private final MainWindow mainWindow;
     private final NumberSpinner spinner;
+    
 
     public ExaltedSystem(final MainWindow m) {
         m.setContentView(R.layout.exalted);

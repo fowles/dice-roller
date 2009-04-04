@@ -30,6 +30,8 @@ import com.roller.R;
 public class GenericSystem implements DiceSystem, OnItemClickListener, OnClickListener  {
     private static final String TAG = "com.roller.generic.GenericSystem";
     private static final String SAVE_FILE = "generic-list-file";
+    public static final int SYSTEM_ID = R.string.generic;
+    public int getSystemId() { return SYSTEM_ID; }
     
     private static final int MAX_SIZE = 100;
     

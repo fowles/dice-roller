@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 
 public interface DiceSystem {
+    public abstract int getSystemId();
     public abstract void loadState();
     public abstract void saveState();
     public abstract void clearState();

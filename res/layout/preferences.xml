@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 	
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+	android:padding="10px" 
+>
+	<RadioGroup
+	    android:id="@+preferences/system"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:text="System" 	
+    	android:padding="10px" 
+	>
+	    <RadioButton
+    	    android:id="@+preferences/generic"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 	
+    		android:text='@string/generic' 
+	    />
+	    <RadioButton
+    	    android:id="@+preferences/exalted"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 	
+    		android:text='@string/exalted' 
+	    />
+	</RadioGroup>
+	<CheckBox
+	    android:id="@+preferences/keep_awake"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+		android:text='Keep phone awake' 
+	/>
+</LinearLayout>
