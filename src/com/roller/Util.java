@@ -1,9 +1,9 @@
 package com.roller;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public final class Util {
-    private static final Random random = new Random();
+    private static final SecureRandom random = new SecureRandom();
     private Util() { }
     
     public static int[] rollDice(final int numDice, final int numSides) {

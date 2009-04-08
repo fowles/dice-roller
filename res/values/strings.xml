@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Dice Roller</string>
     <string name="version">Version</string> 
-    <string name="app_ver">1.1.1</string> 
+    <string name="app_ver">1.1.2</string> 
     <string name="app_copyright">Copyright &#169; 2009 Matt Fowles</string>
     <string name="app_copyright_rights">All rights reserved</string>
     <string name="description">A multi-system dice rolling app</string>
