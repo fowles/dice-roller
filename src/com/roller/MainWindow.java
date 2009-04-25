@@ -16,8 +16,9 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.roller.exalted.ExaltedSystem;
 import com.roller.generic.GenericSystem;
+import com.roller.whitewolf.darkness.WorldOfDarknessSystem;
+import com.roller.whitewolf.exalted.ExaltedSystem;
 
 public class MainWindow extends Activity {
     private static final String TAG = "com.roller.MainWindow";
@@ -58,6 +59,8 @@ public class MainWindow extends Activity {
     public void changeSystem(final String sys) {
         if (sys.equals(getString(ExaltedSystem.SYSTEM_ID))) {
             system = new ExaltedSystem(this);
+        } else if (sys.equals(getString(WorldOfDarknessSystem.SYSTEM_ID))) {
+            system = new WorldOfDarknessSystem(this);
         } else {
             system = new GenericSystem(this);
         }
@@ -143,6 +146,9 @@ public class MainWindow extends Activity {
             case ExaltedSystem.SYSTEM_ID:
                 sysGroup.check(R.preferences.exalted);
                 break;
+            case WorldOfDarknessSystem.SYSTEM_ID:
+                sysGroup.check(R.preferences.darkness);
+                break;                
             case GenericSystem.SYSTEM_ID:
             default:
                 sysGroup.check(R.preferences.generic);

@@ -6,6 +6,7 @@
     <string name="app_copyright">Copyright &#169; 2009 Matt Fowles</string>
     <string name="app_copyright_rights">All rights reserved</string>
     <string name="description">A multi-system dice rolling app</string>
+    <string name="darkness">World of Darkness</string>
     <string name="exalted">Exalted</string>
     <string name="generic">Generic</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.roller.exalted;
+package com.roller.whitewolf.exalted;
 
 import java.io.Serializable;
 

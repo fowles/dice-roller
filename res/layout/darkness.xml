@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation='vertical'
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation='horizontal'
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+    >
+        <com.roller.NumberSpinner
+             android:id="@+darkness/number_spinner"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+        />
+        <Button android:id="@+darkness/roll_normal"
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content" 
+             android:text="Normal" 
+        />
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation='horizontal'
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+    >
+        <!-- Difficulty range is [2,10] -->
+        <TextView 
+            android:id="@+darkness/difficulty_text"
+            android:text="Difficulty: 7"
+            android:layout_height="wrap_content"   
+            android:layout_width="wrap_content" 
+        /> 
+        <SeekBar
+            android:id="@+darkness/difficulty_seek"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_marginRight='10px'
+            android:layout_marginLeft='10px'
+            android:max="8" 
+            android:progress="5" 
+        />
+    </LinearLayout>
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+darkness/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+    />    
+</LinearLayout>
