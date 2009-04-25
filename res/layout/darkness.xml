@@ -16,9 +16,9 @@
              android:layout_height="wrap_content"
         />
         <Button android:id="@+darkness/roll_normal"
-             android:layout_width="wrap_content" 
+             android:layout_width="70px" 
              android:layout_height="wrap_content" 
-             android:text="Normal" 
+             android:text="Roll" 
         />
     </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
