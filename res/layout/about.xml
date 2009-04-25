@@ -58,4 +58,13 @@
 		android:text='@string/app_copyright_rights' 		
 		style="@style/Detail"
 	/>
+	   <TextView
+        android:id='@+about/source_url'
+        android:autoLink='web'
+        android:layout_below="@about/copywrite_detail"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:text='@string/source_url'         
+        style="@style/Detail"
+    />
 </RelativeLayout>
