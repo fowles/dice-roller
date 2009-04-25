@@ -20,7 +20,6 @@ public class WorldOfDarknessRoll {
                 --successes;
             }
         }
-        if (successes < 0) { successes = 0; }
         return successes;
     }
     
@@ -59,7 +58,12 @@ public class WorldOfDarknessRoll {
         
         public CharSequence getResultString() {
             final StringBuilder result = new StringBuilder();
-            result.append("Successes: ").append(successes);
+            result.append("Successes: ");
+            if (successes < 0) {
+                result.append("BOTCH");
+            } else {
+                result.append(successes);
+            }
             result.append("\nRolls: ");
             
             final ArrayList<Integer> rolls = this.rolls;

@@ -46,5 +46,6 @@ public class RollerTest {
     public void testDarknessCountSuccesses() {
         assertEquals(2, WorldOfDarknessRoll.countSuccesses(Arrays.asList(10, 10, 1, 2), 2, 4));
         assertEquals(1, WorldOfDarknessRoll.countSuccesses(Arrays.asList(10, 10, 1, 2), 3, 4));
+        assertEquals(-1, WorldOfDarknessRoll.countSuccesses(Arrays.asList(10, 1, 1, 2), 4, 4));
     }
 }
