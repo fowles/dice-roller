@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Dice Roller</string>
     <string name="version">Version</string> 
-    <string name="app_ver">1.3.0</string> 
+    <string name="app_ver">1.4.0</string> 
     <string name="app_copyright">Copyright &#169; 2009 Matt Fowles</string>
     <string name="app_copyright_rights">All rights reserved</string>
     <string name="source_url">http://wiki.github.com/fowles/dice-roller</string>
