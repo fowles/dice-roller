@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation='vertical'
+    android:orientation='horizontal'
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 >
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+exalted/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+    />    
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   		xmlns:ns="http://schemas.android.com/apk/res/com.roller"
-        android:orientation='horizontal'
-        android:layout_width="fill_parent"
+        android:orientation='vertical'
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
     >
         <com.roller.NumberSpinner
              android:id="@+exalted/number_spinner"
-             android:layout_width="wrap_content"
+             android:layout_width="fill_parent"
              android:layout_height="wrap_content"
              ns:minimum="1"
              
         />
         <Button android:id="@+exalted/roll_damage"
              android:layout_width="fill_parent" 
-             android:layout_height="wrap_content"
-             android:layout_weight="1"     
+             android:layout_height="wrap_content"     
              android:text="Damage" 
         />
         <Button android:id="@+exalted/roll_normal"
              android:layout_width="fill_parent" 
              android:layout_height="wrap_content" 
-             android:layout_weight="1"
              android:text="Normal" 
         />
     </LinearLayout>
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+exalted/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-    />    
 </LinearLayout>

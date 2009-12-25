@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation='vertical'
+    android:orientation='horizontal'
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 >
+    
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+darkness/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        
+    />  
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
  		xmlns:ns="http://schemas.android.com/apk/res/com.roller"
-        android:orientation='horizontal'
-        android:layout_width="fill_parent"
+        android:orientation='vertical'
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
     >
@@ -18,25 +26,14 @@
              ns:minimum="1"
              ns:inital="5"
         />
-        <Button android:id="@+darkness/roll_normal"
-             android:layout_width="fill_parent" 
-             android:layout_height="wrap_content" 
-             android:text="Roll" 
-        />
-    </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation='horizontal'
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-    >
-        <!-- Difficulty range is [2,10] -->
         <TextView 
             android:id="@+darkness/difficulty_text"
             android:text="Difficulty: 7"
             android:layout_height="wrap_content"   
             android:layout_width="wrap_content" 
         /> 
+   
+        <!-- Difficulty range is [2,10] -->
         <SeekBar
             android:id="@+darkness/difficulty_seek"
             android:layout_width="fill_parent"
@@ -46,10 +43,15 @@
             android:max="8" 
             android:progress="5" 
         />
-    </LinearLayout>
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+darkness/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-    />    
+        <View
+        	android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"	
+            android:layout_weight="1"
+        />
+        <Button android:id="@+darkness/roll_normal"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:text="Roll" 
+        />
+    </LinearLayout>  
 </LinearLayout>

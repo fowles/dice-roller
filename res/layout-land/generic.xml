@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation='vertical'
+    android:orientation='horizontal'
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 >
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+generic/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+    />   
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ns="http://schemas.android.com/apk/res/com.roller"
         android:orientation='horizontal'
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
     	android:stretchColumns="2"
     >
@@ -18,27 +24,12 @@
                 android:text="Dice:"
                 android:layout_height="wrap_content"   
             />
-            <TextView 
-                android:text="Modifier:"
-                android:layout_height="wrap_content"   
-            />
-        </TableRow>
-        
-        <TableRow
-            android:gravity="center_vertical"
-        >
             <com.roller.NumberSpinner
                  android:id="@+generic/dice_spinner"
                  android:layout_width="fill_parent"
                  android:layout_height="wrap_content"
                  ns:minimum="1"
-                 ns:inital="1"
-                 
-            />
-            <com.roller.NumberSpinner
-                 android:id="@+generic/mod_spinner"
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
+                 ns:inital="1" 
             />
         </TableRow>
         
@@ -49,11 +40,6 @@
                 android:text="Sides:"
                 android:layout_height="wrap_content"   
             />
-        </TableRow>
-        
-        <TableRow
-            android:gravity="center_vertical"
-        >
             <com.roller.NumberSpinner
                  android:id="@+generic/sides_spinner"
                  android:layout_width="fill_parent"
@@ -61,16 +47,26 @@
                  ns:minimum="1"
                  ns:inital="20"
             />
+        </TableRow>
+        
+        <TableRow
+            android:gravity="center_vertical"
+        >
+            <TextView 
+                android:text="Modifier:"
+                android:layout_height="wrap_content"   
+            />
+            <com.roller.NumberSpinner
+                 android:id="@+generic/mod_spinner"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+            />
+        </TableRow>
             <Button android:id="@+generic/roll"
                  android:layout_width="fill_parent" 
                  android:layout_height="wrap_content" 
                  android:text="Roll" 
-            />
-        </TableRow>
+            /> 
     </TableLayout>
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+generic/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-    />    
 </LinearLayout>
+
