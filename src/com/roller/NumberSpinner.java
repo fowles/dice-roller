@@ -115,21 +115,17 @@ public class NumberSpinner extends LinearLayout implements OnClickListener,
 			return false;
 		}
 
-		final EditText numberEdit = this.numberEdit;
-		final int selectionStart = numberEdit.getSelectionStart();
-		final int selectionEnd = numberEdit.getSelectionEnd();
-
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_DPAD_LEFT:
-			if (selectionStart <= 0) {
+			if (numberEdit.getSelectionStart() <= 0) {
 				setValue(getValue() - 1);
 				return true;
 			}
 			break;
 		case KeyEvent.KEYCODE_DPAD_RIGHT:
-			if (selectionEnd >= numberEdit.length()) {
+			if (numberEdit.getSelectionEnd() >= numberEdit.length()) {
 				setValue(getValue() + 1);
-				numberEdit.setSelection(selectionEnd);
+				numberEdit.setSelection(numberEdit.length());
 				return true;
 			}
 			break;
