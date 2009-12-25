@@ -38,13 +38,8 @@ public class GenericRoll {
 				total += r;
 				rollStr.append(r);
 			}
-			if (modifier != 0) {
-				total += modifier;
-				rollStr.append(" (");
-				if (modifier > 0)
-					rollStr.append("+");
-				rollStr.append(modifier + ")");
-			}
+
+			total += modifier;
 			final StringBuilder result = new StringBuilder();
 			result.append("Total: ").append(total);
 			result.append("\nRolls: ").append(rollStr);
@@ -53,11 +48,20 @@ public class GenericRoll {
 
 		public CharSequence getDetailsString() {
 			final Details details = this.details;
+			final int modifier = details.getModifier();
 
 			final StringBuilder res = new StringBuilder();
 			res.append(details.getNumDice());
 			res.append("D");
 			res.append(details.getNumSides());
+			
+			if (modifier != 0) {
+				res.append(" (");
+				if (modifier > 0)
+					res.append("+");
+				res.append(modifier + ")");
+			}
+			
 			return res;
 
 		}

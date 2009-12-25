@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"   
             />
             <TextView 
-                android:text="Mod:"
+                android:text="Modifier:"
                 android:layout_height="wrap_content"   
             />
         </TableRow>
