@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
     	android:stretchColumns="2"
+        android:layout_weight="0"
     >
         <TableRow
             android:gravity="center_vertical"
@@ -62,11 +63,18 @@
                  android:layout_height="wrap_content"
             />
         </TableRow>
-            <Button android:id="@+generic/roll"
-                 android:layout_width="fill_parent" 
-                 android:layout_height="wrap_content" 
-                 android:text="Roll" 
-            /> 
+        <TableRow
+        	android:layout_height="fill_parent"
+        	android:layout_width="wrap_content"
+        	android:layout_weight="1"
+        >
+        <View/>
+        </TableRow>
+        <Button android:id="@+generic/roll"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:text="Roll" 
+        /> 
     </TableLayout>
 </LinearLayout>
 
