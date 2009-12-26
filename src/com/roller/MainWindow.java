@@ -19,6 +19,7 @@ import android.widget.RadioGroup;
 import com.roller.generic.GenericSystem;
 import com.roller.whitewolf.darkness.WorldOfDarknessSystem;
 import com.roller.whitewolf.exalted.ExaltedSystem;
+import com.roller.whitewolf.newdarkness.NewWorldOfDarknessSystem;
 
 public class MainWindow extends Activity {
     private static final String TAG = "com.roller.MainWindow";
@@ -61,6 +62,8 @@ public class MainWindow extends Activity {
             system = new ExaltedSystem(this);
         } else if (sys.equals(getString(WorldOfDarknessSystem.SYSTEM_ID))) {
             system = new WorldOfDarknessSystem(this);
+        } else if (sys.equals(getString(NewWorldOfDarknessSystem.SYSTEM_ID))) {
+            system = new NewWorldOfDarknessSystem(this);
         } else {
             system = new GenericSystem(this);
         }
