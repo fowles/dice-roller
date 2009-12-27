@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.view.ContextMenu;
@@ -15,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.roller.generic.GenericSystem;
 import com.roller.whitewolf.darkness.WorldOfDarknessSystem;
@@ -195,6 +198,14 @@ public class MainWindow extends Activity {
             d = new Dialog(this);
             d.setTitle("About");
             d.setContentView(id);
+            
+            final TextView version = (TextView) d.findViewById(R.about.version_field);
+            final PackageManager p = getPackageManager();
+            try {
+                version.setText(p.getPackageInfo(getClass().getPackage().getName(), 0).versionName);
+            } catch (final NameNotFoundException e) {
+                version.setText("UNKNOWN");
+            }
             break;
         default:
             d = null;

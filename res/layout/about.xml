@@ -36,9 +36,10 @@
     		style="@style/Detail"
     	/>
     	<TextView
+    	    android:id='@+about/version_field'
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 	
-    		android:text='@string/app_ver' 
+    		android:text='UNKNOWN' 
     		style="@style/Detail"
     	/>
 	</LinearLayout>
