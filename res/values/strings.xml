@@ -2,8 +2,9 @@
 <resources>
     <string name="app_name">Dice Roller</string>
     <string name="version">Version</string> 
-    <string name="app_copyright">Copyright &#169; 2009 Matt Fowles</string>
-    <string name="app_copyright_rights">All rights reserved</string>
+    <string name="contributors">Contributors:</string> 
+    <string name="matt_fowles">Matt Fowles</string> 
+    <string name="michael_daffin">Michael Daffin</string> 
     <string name="source_url">http://wiki.github.com/fowles/dice-roller</string>
     <string name="description">A multi-system dice rolling app</string>
     <string name="darkness">World of Darkness</string>

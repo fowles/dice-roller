@@ -1,71 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" 
-	android:layout_height="wrap_content"
-	android:padding="10px" 
->    
-	<ImageView
-	    android:id='@+about/icon'
-	    android:src='@drawable/d10'
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-    	android:layout_alignParentTop="true"
-    	android:layout_alignParentLeft="true"
-	/>
-	<TextView
-	    android:id='@+about/title'
-	    android:layout_alignParentTop="true"
-	    android:layout_toRightOf="@about/icon"
-	    android:layout_alignParentRight="true"
-		android:text='Dice Roller' 
-		style="@style/Header"
-	/>
-	<LinearLayout
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 	
-    	    android:layout_below="@about/title"
-    	    android:layout_toRightOf="@about/icon"
-    	    android:layout_alignParentRight="true"
-    	    android:gravity='center'
-	>
-    	<TextView
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 	
-    		android:paddingRight='3px'
-    		android:text='@string/version' 
-    		style="@style/Detail"
-    	/>
-    	<TextView
-    	    android:id='@+about/version_field'
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 	
-    		android:text='UNKNOWN' 
-    		style="@style/Detail"
-    	/>
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:padding="10px">
+	<ImageView android:id='@+about/icon' android:src='@drawable/d10'
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentTop="true" android:layout_alignParentLeft="true" />
+	<TextView android:id='@+about/title'
+		android:layout_alignParentTop="true" android:layout_toRightOf="@about/icon"
+		android:layout_alignParentRight="true" android:text='Dice Roller'
+		style="@style/Header" />
+	<LinearLayout android:layout_width="wrap_content"
+		android:id="@+about/version_box" android:layout_height="wrap_content"
+		android:layout_below="@about/title" android:layout_toRightOf="@about/icon"
+		android:layout_alignParentRight="true" android:gravity='center'
+		android:paddingBottom='10px'>
+		<TextView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:paddingRight='3px'
+			android:text='@string/version' style="@style/Detail" />
+		<TextView android:id='@+about/version_field'
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text='UNKNOWN' style="@style/Detail" />
 	</LinearLayout>
-    <TextView
-	    android:id='@+about/copywrite'
-	    android:layout_below="@about/icon"
-	    android:layout_alignParentRight="true"
-	    android:layout_alignParentLeft="true"
-		android:text='@string/app_copyright' 		
-		style="@style/Detail"
-	/>
-	<TextView
-	    android:id='@+about/copywrite_detail'
-	    android:layout_below="@about/copywrite"
-	    android:layout_alignParentRight="true"
-	    android:layout_alignParentLeft="true"
-		android:text='@string/app_copyright_rights' 		
-		style="@style/Detail"
-	/>
-	   <TextView
-        android:id='@+about/source_url'
-        android:autoLink='web'
-        android:layout_below="@about/copywrite_detail"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:text='@string/source_url'         
-        style="@style/Detail"
-    />
+	<TextView android:id='@+about/contributors' android:text='@string/contributors'
+		android:layout_below="@about/version_box" android:layout_toRightOf="@about/icon"
+		android:layout_alignParentRight="true" style="@style/Detail"
+		android:paddingRight='20px' />
+	<TextView android:id='@+about/matt_fowles' android:text='@string/matt_fowles'
+		android:layout_below="@about/contributors" android:layout_toRightOf="@about/icon"
+		android:layout_alignParentRight="true" style="@style/Detail"
+		android:paddingLeft='20px' />
+	<TextView android:id='@+about/michael_daffin' android:text='@string/michael_daffin'
+		android:layout_below="@about/matt_fowles" android:layout_toRightOf="@about/icon"
+		android:layout_alignParentRight="true" style="@style/Detail"
+		android:paddingLeft='20px' />
+	<TextView android:autoLink='web' android:text='@string/source_url'
+		style="@style/Detail" android:layout_below="@about/michael_daffin"
+		android:layout_alignParentRight="true" android:layout_alignParentLeft="true"
+		android:gravity='center' />
 </RelativeLayout>
